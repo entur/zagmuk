@@ -1,24 +1,25 @@
 import React from 'react';
+import { RefreshIcon } from '@entur/icons'
+import { IconButton } from '@entur/button';
+import { Pagination } from '@entur/menu';
 import EventStepper from './EventStepper';
-import './EventDetails.css';
-//import FaFresh from 'react-icons/lib/fa/refresh';
 import translations from './translations';
 import FilterButtonTray from './FilterButtonTray';
 import { getLastValidDate } from './buttonConfig';
+import './EventDetails.css';
 
 class EventDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      activePageIndex: 0,
+      activePageIndex: 1,
       endStateFilter: 'ALL',
       dateFilter: props.showDateFilter ? 'LAST_12_HOURS' : 'ALL_TIME',
       onlyNewDeliveryFilter: false
     };
   }
 
-  handlePageClick(e, pageIndex) {
-    e.preventDefault();
+  handlePageClick(pageIndex) {
     this.setState({
       activePageIndex: pageIndex
     });
@@ -27,7 +28,7 @@ class EventDetails extends React.Component {
   handleFilterChange(dateFilter) {
     this.setState({
       dateFilter: dateFilter,
-      activePageIndex: 0
+      activePageIndex: 1
     });
   }
 
@@ -151,14 +152,13 @@ class EventDetails extends React.Component {
       </div>
     );
 
-    const page = paginationMap[activePageIndex];
+    const page = paginationMap[activePageIndex - 1];
 
     const refreshButton = this.props.handleRefresh && (
       <div style={{ marginRight: 15, float: 'right', cursor: 'pointer' }}>
-        {/* <FaFresh
-          style={{ transform: 'scale(1.5)' }}
-          onClick={this.props.handleRefresh}
-        /> */}
+        <IconButton onClick={this.props.handleRefresh}>
+          <RefreshIcon />
+        </IconButton>
       </div>
     );
 
@@ -170,22 +170,13 @@ class EventDetails extends React.Component {
           </div>
           {refreshButton}
           <div className="page-link-parent">
-            <span>{translations[locale].page}</span>
-            {paginationMap.map((page, index) => {
-              const isActive =
-                index == activePageIndex
-                  ? 'page-link active-link'
-                  : 'page-link inactive-link';
-              return (
-                <span
-                  className={isActive}
-                  onClick={e => this.handlePageClick(e, index)}
-                  key={'link-' + index}
-                >
-                  {index + 1}
-                </span>
-              );
-            })}
+            <Pagination
+              pageCount={Math.ceil(filteredSource.length / 10)}
+              numberOfResults={filteredSource.length}
+              currentPage={activePageIndex}
+              resultsPerPage={10}
+              onPageChange={this.handlePageClick.bind(this)}
+            />
           </div>
           <div>
             {page.map((listItem, index) => {

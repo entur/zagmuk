@@ -51,6 +51,7 @@ export function App(props: AppProps) {
                   <div className="zagmuk-app-content">
                     {/* <Switch> */}
                       <EventDetails
+                        handleRefresh={() => {}}
                         locale="en"
                         dataSource={testData} 
                       />
