@@ -127,7 +127,7 @@ class EventStepper extends React.Component {
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'space-between',
-      height: Array.isArray(column) && column.length > 2 ? 90 : 45
+      height: Array.isArray(column) && column.length > 2 ? 30 * column.length : 45
     });
 
     return Object.keys(formattedGroups).map((group, index) => {
