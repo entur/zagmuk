@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ActionTranslations from './actionTranslations';
-// import FaChevronDown from 'react-icons/lib/fa/chevron-down';
-// import FaChevronUp from 'react-icons/lib/fa/chevron-up';
+import {DownArrowIcon, UpArrowIcon} from '@entur/icons';
 import ControlledLink from './ControlledLink';
 import translations from './translations';
 import EventStatusIcon from './EventStatusIcon';
@@ -314,7 +313,7 @@ class EventStepper extends React.Component {
             style={{ marginLeft: 'auto', marginRight: 20, marginTop: -25 }}
             onClick={() => this.handleToggleVisibility()}
           >
-            {/* {!expanded ? <FaChevronDown /> : <FaChevronUp />} */}
+            {!expanded ? <DownArrowIcon /> : <UpArrowIcon />}
           </div>
         </div>
         {expanded && (
