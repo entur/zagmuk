@@ -2,6 +2,7 @@ import React from 'react';
 import { RefreshIcon } from '@entur/icons'
 import { IconButton } from '@entur/button';
 import { Pagination } from '@entur/menu';
+import { Dropdown } from '@entur/dropdown';
 import EventStepper from './EventStepper';
 import translations from './translations';
 import FilterButtonTray from './FilterButtonTray';
@@ -101,26 +102,19 @@ class EventDetails extends React.Component {
 
     const filters = (
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        <select
-          style={{ fontSize: '0.9em' }}
-          value={endStateFilter}
-          onChange={e => {
-            e.preventDefault();
-            this.setState({
-              endStateFilter: e.target.value,
-              activePageIndex: 0
-            });
-          }}
-        >
-          <option value="ALL">{translations[locale].show_all}</option>
-          <option value="OK">{translations[locale].show_only_success}</option>
-          <option value="CANCELLED">
-            {translations[locale].show_only_cancelled}
-          </option>
-          <option value="FAILED">
-            {translations[locale].show_only_failed}
-          </option>
-        </select>
+        <div style={{ minWidth: '12.5rem'}}>
+          <Dropdown
+            label={translations[locale].show}
+            value={endStateFilter}
+            onChange={selectedItem => this.setState({ endStateFilter: selectedItem.value, activePageIndex: 1 })}
+            items={[
+              { label: translations[locale].show_all, value: 'ALL' },
+              { label: translations[locale].show_only_success, value: 'OK' },
+              { label: translations[locale].show_only_cancelled, value: 'CANCELLED' },
+              { label: translations[locale].show_only_failed, value: 'FAILED' },
+            ]}
+          />
+        </div>
         {showDateFilter && (
           <FilterButtonTray
             locale={locale}
@@ -140,7 +134,7 @@ class EventDetails extends React.Component {
               onChange={e => {
                 this.setState({
                   onlyNewDeliveryFilter: e.target.checked,
-                  activePageIndex: 0
+                  activePageIndex: 1
                 });
               }}
             />

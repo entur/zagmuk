@@ -53,7 +53,11 @@ export function App(props: AppProps) {
                       <EventDetails
                         handleRefresh={() => {}}
                         locale="en"
-                        dataSource={testData} 
+                        dataSource={testData}
+                        // showDateFilter
+                        // showNewDeliveriesFilter
+                        hideIgnoredExportNetexBlocks={true}
+                        hideAntuValidationSteps={true}
                       />
                       {/* <Route path="/report/:codespace/:id" component={Report} /> */}
                     {/* </Switch> */}

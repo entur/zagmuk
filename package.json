@@ -5,6 +5,7 @@
   "dependencies": {
     "@auth0/auth0-react": "1.11.0",
     "@entur/button": "2.10.4",
+    "@entur/dropdown": "3.0.16",
     "@entur/form": "5.4.4",
     "@entur/icons": "4.3.3",
     "@entur/layout": "2.1.11",
