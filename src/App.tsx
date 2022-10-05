@@ -54,8 +54,8 @@ export function App(props: AppProps) {
                         handleRefresh={() => {}}
                         locale="en"
                         dataSource={testData}
-                        // showDateFilter
-                        // showNewDeliveriesFilter
+                        showDateFilter
+                        showNewDeliveriesFilter
                         hideIgnoredExportNetexBlocks={true}
                         hideAntuValidationSteps={true}
                       />

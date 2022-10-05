@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import FilterButton from './FilterButton';
+import { SegmentedControl, SegmentedChoice } from '@entur/form';
 import buttonConfig from './buttonConfig';
 import translations from './actionTranslations';
 
@@ -10,15 +10,16 @@ class FilterButtonTray extends Component {
 
     return (
       <div style={this.props.style}>
+        <SegmentedControl
+          onChange={selectedValue => onChange(selectedValue)}
+          selectedValue={activeButtonId}
+        >
         {buttonConfig.fields.map(field =>
-          <FilterButton
-            active={activeButtonId === field.id}
-            id={field.id}
-            handleClick={() => { onChange(field.id) }}
-            key={'filter-button-' + field.id}
-            label={translations[locale].filterButton[field.id]}
-          />
+          <SegmentedChoice value={field.id} style={{ 'white-space': 'nowrap' }}>
+            {translations[locale].filterButton[field.id]}
+          </SegmentedChoice>
         )}
+        </SegmentedControl>
       </div>
     );
   }

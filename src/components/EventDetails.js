@@ -1,8 +1,9 @@
 import React from 'react';
 import { RefreshIcon } from '@entur/icons'
-import { IconButton } from '@entur/button';
+import { FloatingButton } from '@entur/button';
 import { Pagination } from '@entur/menu';
 import { Dropdown } from '@entur/dropdown';
+import { Checkbox, Fieldset } from '@entur/form';
 import EventStepper from './EventStepper';
 import translations from './translations';
 import FilterButtonTray from './FilterButtonTray';
@@ -39,6 +40,7 @@ class EventDetails extends React.Component {
     endStateFilter,
     onlyNewDeliveryFilter
   ) {
+    
     const lastDate = getLastValidDate(dateFilter);
 
     return (dataSource || []).filter(event => {
@@ -115,32 +117,31 @@ class EventDetails extends React.Component {
             ]}
           />
         </div>
+        
         {showDateFilter && (
-          <FilterButtonTray
-            locale={locale}
-            style={{ marginLeft: 20 }}
-            activeButtonId={this.state.dateFilter}
-            onChange={this.handleFilterChange.bind(this)}
-          />
+          <div>
+            <FilterButtonTray
+              locale={locale}
+              style={{ marginLeft: 20 }}
+              activeButtonId={this.state.dateFilter}
+              onChange={this.handleFilterChange.bind(this)}
+            />
+          </div>
         )}
+
         {showNewDeliveriesFilter && (
-          <div style={{ marginLeft: 10, paddingTop: 2 }}>
-            <input
-              type="checkbox"
-              id="direct_delivery"
-              name="direct_delivery"
+          <div style={{ marginLeft: 10 }}>
+            <Checkbox
               checked={onlyNewDeliveryFilter}
-              style={{ margin: '0 10px' }}
               onChange={e => {
                 this.setState({
                   onlyNewDeliveryFilter: e.target.checked,
                   activePageIndex: 1
                 });
               }}
-            />
-            <label htmlFor="direct_delivery">
+            >
               {translations[locale].filter_direct_delivery}
-            </label>
+            </Checkbox>
           </div>
         )}
       </div>
@@ -149,11 +150,10 @@ class EventDetails extends React.Component {
     const page = paginationMap[activePageIndex - 1];
 
     const refreshButton = this.props.handleRefresh && (
-      <div style={{ marginRight: 15, float: 'right', cursor: 'pointer' }}>
-        <IconButton onClick={this.props.handleRefresh}>
+        <FloatingButton size="small" onClick={this.props.handleRefresh}>
           <RefreshIcon />
-        </IconButton>
-      </div>
+          {translations[locale].refresh}
+        </FloatingButton>
     );
 
     if (page && page.length && paginationMap) {
@@ -162,7 +162,9 @@ class EventDetails extends React.Component {
           <div style={{ width: '100%', textAlign: 'left', marginBottom: 5 }}>
             {filters}
           </div>
-          {refreshButton}
+          <div style={{ marginRight: 15, float: 'right' }}>
+            {refreshButton}
+          </div>
           <div className="page-link-parent">
             <Pagination
               pageCount={Math.ceil(filteredSource.length / 10)}

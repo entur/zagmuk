@@ -7,11 +7,12 @@ export default {
     duration: 'Duration: ',
     username: 'Username: ',
     show: 'Show',
-    show_all: 'Show all',
-    show_only_failed: 'Show only failed',
-    show_only_success: 'Show only successful',
-    show_only_cancelled: "Show only cancelled",
-    filter_direct_delivery: "Only started with file delivery"
+    show_all: 'All',
+    show_only_failed: 'Only failed',
+    show_only_success: 'Only successful',
+    show_only_cancelled: "Only cancelled",
+    filter_direct_delivery: "Only started with file delivery",
+    refresh: 'Refresh'
   },
   "nb": {
     page: 'Side: ',
@@ -21,11 +22,12 @@ export default {
     duration: 'Varighet',
     username: 'Brukernavn: ',
     show: 'Vis',
-    show_all: 'Vis alle',
-    show_only_failed: 'Vis kun feilet',
-    show_only_success: 'Vis kun vellykket',
-    show_only_cancelled: "Vis kun kansellerte",
-    filter_direct_delivery: "Kun startet ved filleveranse"
+    show_all: 'Alle',
+    show_only_failed: 'Kun feilet',
+    show_only_success: 'Kun vellykket',
+    show_only_cancelled: "Kun kansellerte",
+    filter_direct_delivery: "Kun startet ved filleveranse",
+    refresh: 'Last på nytt'
   }
 }
 

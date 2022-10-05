@@ -1,49 +1,38 @@
-@import url(//fonts.googleapis.com/earlyaccess/notosanskannada.css);
-
-body {
-    font-family: 'Noto Sans Kannada', sans-serif;
-    color: #191919;
-}
-
-p,h1,h2,h3,h4,h5, span {
-    color: #191919;
-}
-
 .period-block:after {
-    content: "";
-    height: 18px;
-    display: inline-block;
-    vertical-align: middle;
+  content: "";
+  height: 18px;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .page-link-parent {
-    display: block;
-    margin-bottom: 20px;
+  display: block;
+  margin-bottom: 20px;
 }
 
 .page-link {
-    display: inline-block;
-    cursor: pointer;
-    margin-left: 5px;
-    margin-top: 3px;
-    font-size: 0.9em;
+  display: inline-block;
+  cursor: pointer;
+  margin-left: 5px;
+  margin-top: 3px;
+  font-size: 0.9em;
 }
 
 .active-link {
-    color: #0D3C61;
-    text-decoration: underline;
+  color: #0d3c61;
+  text-decoration: underline;
 }
 
 .inactive-link {
-    color: #2196F3;
+  color: #2196f3;
 }
-
 
 a {
-    color: #2196F3;
-    text-decoration: none;
+  color: #2196f3;
+  text-decoration: none;
 }
 
-a:hover, a:focus {
-    color: #1976D2;
+a:hover,
+a:focus {
+  color: #1976d2;
 }
