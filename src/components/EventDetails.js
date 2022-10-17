@@ -3,7 +3,7 @@ import { RefreshIcon } from '@entur/icons'
 import { FloatingButton } from '@entur/button';
 import { Pagination } from '@entur/menu';
 import { Dropdown } from '@entur/dropdown';
-import { Checkbox, Fieldset } from '@entur/form';
+import { Checkbox } from '@entur/form';
 import EventStepper from './EventStepper';
 import translations from './translations';
 import FilterButtonTray from './FilterButtonTray';

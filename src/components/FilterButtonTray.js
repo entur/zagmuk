@@ -15,7 +15,7 @@ class FilterButtonTray extends Component {
           selectedValue={activeButtonId}
         >
         {buttonConfig.fields.map(field =>
-          <SegmentedChoice value={field.id} style={{ 'white-space': 'nowrap' }}>
+          <SegmentedChoice key={field.id} value={field.id} style={{ whiteSpace: 'nowrap' }}>
             {translations[locale].filterButton[field.id]}
           </SegmentedChoice>
         )}

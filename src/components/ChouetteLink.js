@@ -1,8 +1,9 @@
 import React from 'react';
+import { useConfig } from '../config/config';
 
 const ChouetteLink = ({ action, id, referential, children }) => {
-  // const baseURL = `${window.config.chouetteBaseUrl}referentials/`;
-  const baseURL = "/";
+  const { chouetteBaseUrl } = useConfig();
+  const baseURL = `${chouetteBaseUrl}referentials/`;
 
   const actionMap = {
     importer: `imports/${id}/compliance_check`,
