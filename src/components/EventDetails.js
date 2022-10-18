@@ -150,7 +150,7 @@ class EventDetails extends React.Component {
     const page = paginationMap[activePageIndex - 1];
 
     const refreshButton = this.props.handleRefresh && (
-        <FloatingButton size="small" onClick={this.props.handleRefresh}>
+        <FloatingButton size="small" onClick={() => this.props.handleRefresh()}>
           <RefreshIcon />
           {translations[locale].refresh}
         </FloatingButton>

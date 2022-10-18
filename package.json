@@ -9,6 +9,7 @@
     "@entur/form": "5.4.4",
     "@entur/icons": "4.3.3",
     "@entur/layout": "2.1.11",
+    "@entur/loader": "^0.4.12",
     "@entur/menu": "4.1.11",
     "@entur/micro-frontend": "0.4.0",
     "@entur/tokens": "3.4.1",

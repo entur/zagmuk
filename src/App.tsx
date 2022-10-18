@@ -1,17 +1,13 @@
 import React from 'react';
-// import { AppProvider } from './AppProvider';
 import { DefaultPayload } from '@entur/micro-frontend';
+import * as Sentry from '@sentry/react';
+import { BrowserTracing } from '@sentry/tracing';
 import { ConfigContext, useConfigProviderValue } from './config/config';
 //import { IntlProvider } from 'react-intl';
 //import { useLocaleData } from './hooks/useLocaleData';
-import * as Sentry from '@sentry/react';
-import { BrowserTracing } from '@sentry/tracing';
-import EventDetails from './components/EventDetails';
-import './App.css';
-
-
-import testData from './testData.json';
 import { ConnectedEventDetails } from './components/ConnectedEventDetails';
+
+import './App.css';
 
 interface AppProps extends DefaultPayload {}
 
@@ -42,20 +38,7 @@ export function App(props: AppProps) {
           > */}
                 <div className="zagmuk-app">
                   <div className="zagmuk-app-content">
-                    <ConnectedEventDetails providerId={props.providerId}>
-                      {(eventDetails: any) => (
-                        <EventDetails
-                          handleRefresh={() => {}} // todo: implement
-                          navigate={() => {}} // todo: implement
-                          locale="en"
-                          dataSource={eventDetails}
-                          showDateFilter
-                          showNewDeliveriesFilter
-                          hideIgnoredExportNetexBlocks={false}
-                          hideAntuValidationSteps={false}
-                        />
-                      )}
-                      </ConnectedEventDetails>
+                    <ConnectedEventDetails providerId={props.providerId} />
                   </div>
                 </div>
           {/* </IntlProvider> */}
