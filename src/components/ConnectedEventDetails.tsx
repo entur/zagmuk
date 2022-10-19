@@ -5,16 +5,9 @@ import EventDetails from "./EventDetails";
 import { useEvents } from "./useEvents";
 
 export const ConnectedEventDetails = () => {
-  const {
-    isLoading,
-    isError,
-    data,
-    error
-  } = useEvents();
+  const { isLoading, isError, data, error } = useEvents();
 
-  const {
-    locale
-  } = useContext(AppContext);
+  const { locale } = useContext(AppContext);
 
   if (isLoading) {
     return <Loader>Loading events...</Loader>;
@@ -24,15 +17,17 @@ export const ConnectedEventDetails = () => {
     return <span>Error: {error?.message}</span>;
   }
 
-  return <>
-    <EventDetails
-      navigate={() => {}} // todo: implement
-      locale={locale}
-      dataSource={data}
-      showDateFilter
-      showNewDeliveriesFilter
-      hideIgnoredExportNetexBlocks={false}
-      hideAntuValidationSteps={false}
-    />
-  </>;
-}
+  return (
+    <>
+      <EventDetails
+        navigate={() => {}} // todo: implement
+        locale={locale}
+        dataSource={data}
+        showDateFilter
+        showNewDeliveriesFilter
+        hideIgnoredExportNetexBlocks={false}
+        hideAntuValidationSteps={false}
+      />
+    </>
+  );
+};

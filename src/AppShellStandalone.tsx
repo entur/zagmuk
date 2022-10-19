@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import {
   Auth0Provider,
   Auth0ProviderOptions,
   useAuth0,
-} from '@auth0/auth0-react';
-import { App } from './App';
-import { Dropdown } from '@entur/dropdown';
+} from "@auth0/auth0-react";
+import { App } from "./App";
+import { Dropdown } from "@entur/dropdown";
 
 const onRedirectCallback =
   (navigate: any) =>
@@ -23,9 +23,12 @@ const AuthedApp = () => {
   useEffect(() => {
     const fetchProviders = async () => {
       const accessToken = await auth.getAccessTokenSilently();
-      const response = await fetch("https://api.dev.entur.io/timetable-admin/v1/providers", {
-        headers: { Authorization: `Bearer ${accessToken}` },
-      });
+      const response = await fetch(
+        "https://api.dev.entur.io/timetable-admin/v1/providers",
+        {
+          headers: { Authorization: `Bearer ${accessToken}` },
+        }
+      );
       const data = await response.json();
       setProviders(data);
     };
@@ -42,13 +45,12 @@ const AuthedApp = () => {
         value={providerId}
       />
       <App
-        locale={process.env.REACT_APP_LOCALE || 'en'}
-        env={process.env.REACT_APP_ENV || 'dev'}
+        locale={process.env.REACT_APP_LOCALE || "en"}
+        env={process.env.REACT_APP_ENV || "dev"}
         getToken={auth.getAccessTokenSilently}
         providerId={providerId}
       />
     </>
-    
   );
 };
 
@@ -58,7 +60,9 @@ export const AppShellStandalone = (props: Props) => {
       {...props}
       cacheLocation="localstorage"
       useRefreshTokens
-      onRedirectCallback={onRedirectCallback((v: string) => window.history.pushState(null, v))}
+      onRedirectCallback={onRedirectCallback((v: string) =>
+        window.history.pushState(null, v)
+      )}
     >
       <AuthedApp />
     </Auth0Provider>

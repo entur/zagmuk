@@ -1,6 +1,6 @@
-import { Link } from '@entur/typography';
-import React from 'react';
-import { useConfig } from '../config/config';
+import { Link } from "@entur/typography";
+import React from "react";
+import { useConfig } from "../config/config";
 
 const UdugLink = ({ id, referential, navigate, children }) => {
   const { udugBaseUrl } = useConfig();

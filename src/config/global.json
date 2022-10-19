@@ -1,4 +1,4 @@
 {
-    "sentryDSN": "https://a6debfebb55240cfa1f1faa8a764af76@o209253.ingest.sentry.io/4503931072282624",
-    "udugBaseUrl": "/netex-validation-reports/"
+  "sentryDSN": "https://a6debfebb55240cfa1f1faa8a764af76@o209253.ingest.sentry.io/4503931072282624",
+  "udugBaseUrl": "/netex-validation-reports/"
 }

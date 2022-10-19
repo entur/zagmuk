@@ -1,5 +1,5 @@
 {
-    "env": "development",
-    "chouetteBaseUrl": "https://rutedb.dev.entur.org/",
-    "timetableEventsApiUrl": "https://api.dev.entur.io/timetable-admin/v1/events/timetable"
+  "env": "development",
+  "chouetteBaseUrl": "https://rutedb.dev.entur.org/",
+  "timetableEventsApiUrl": "https://api.dev.entur.io/timetable-admin/v1/events/timetable"
 }
