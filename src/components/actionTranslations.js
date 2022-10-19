@@ -14,7 +14,7 @@
  *
  */
 
-export default {
+const translations = {
   nb: {
     text: {
       FILE_TRANSFER: 'Filoverføring',
@@ -153,3 +153,5 @@ export default {
     }
   }
 };
+
+export default translations;

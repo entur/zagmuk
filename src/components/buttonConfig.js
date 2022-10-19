@@ -38,6 +38,8 @@ export const getLastValidDate = id => {
       let now = new Date();
       return new Date(now.setDate(now.getDate() - 1));
     }
+    default:
+      return null;
   }
 };
 

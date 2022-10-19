@@ -1,4 +1,4 @@
-export default {
+const translations = {
   "en": {
     page: 'Page: ',
     no_status: 'No result with applied filter',
@@ -29,5 +29,6 @@ export default {
     filter_direct_delivery: "Kun startet ved filleveranse",
     refresh: 'Last på nytt'
   }
-}
+};
 
+export default translations;

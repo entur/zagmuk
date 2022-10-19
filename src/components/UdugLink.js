@@ -1,3 +1,4 @@
+import { Link } from '@entur/typography';
 import React from 'react';
 import { useConfig } from '../config/config';
 
@@ -7,9 +8,9 @@ const UdugLink = ({ id, referential, navigate, children }) => {
   const URL = `${baseURL}${referential}/${id}`;
 
   return (
-    <a title={URL} onClick={() => navigate(URL)}>
+    <Link title={URL} onClick={() => navigate(URL)}>
       {children}
-    </a>
+    </Link>
   );
 };
 

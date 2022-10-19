@@ -116,7 +116,7 @@ class EventStepper extends React.Component {
       groups.FILE_DELIVERY = {
         endState: errorOn ? 'FAILED' : endState,
         errorOn,
-        missingBeforeStartStart: endState == 'IGNORED' && !errorOn
+        missingBeforeStartStart: endState === 'IGNORED' && !errorOn
       };
     }
     return groups;

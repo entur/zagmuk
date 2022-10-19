@@ -13,7 +13,7 @@ const ChouetteLink = ({ action, id, referential, children }) => {
   const URL = `${baseURL}${referential}/${actionMap[action]}`;
 
   return (
-    <a title={URL} target="_blank" href={URL}>
+    <a title={URL} target="_blank" rel="noreferrer" href={URL}>
       {children}
     </a>
   );

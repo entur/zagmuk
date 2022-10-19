@@ -60,8 +60,10 @@ class EventStatusIcon extends Component {
             style={{ color: 'red', width: 22, height: 22 }}
           />
         );
+
+      default:
+        return <QuestionIcon style={{ color: 'grey', width: 22, height: 22 }} />;
     }
-    return <QuestionIcon style={{ color: 'grey', width: 22, height: 22 }} />;
   }
 }
 
