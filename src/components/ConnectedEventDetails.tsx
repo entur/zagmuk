@@ -1,44 +1,38 @@
-import { useAuth0 } from "@auth0/auth0-react";
 import { Loader } from "@entur/loader";
-import { useCallback, useEffect, useState } from "react";
-import { useConfig } from "../config/config";
+import { useContext } from "react";
+import { AppContext } from "../App";
 import EventDetails from "./EventDetails";
+import { useEvents } from "./useEvents";
 
-export const ConnectedEventDetails = ({providerId}: {providerId?: string}) => {
-  const [loading, setLoading] = useState(false);
-  const [eventDetails, setEventDetails] = useState<any>(null);
-  const {timetableEventsApiUrl} = useConfig();
-  const auth = useAuth0();
+export const ConnectedEventDetails = () => {
+  const {
+    isLoading,
+    isError,
+    data,
+    error
+  } = useEvents();
 
-  const fetchEventDetails = useCallback(async () => {
-    setLoading(true);
-    const accessToken = await auth.getAccessTokenSilently();
-    const response = await fetch(`${timetableEventsApiUrl!}/${providerId ? providerId : ''}`, {
-      headers: { Authorization: `Bearer ${accessToken}` },
-    });
-    const data = await response.json();
-    setEventDetails(data);
-    setLoading(false);
-  }, []);
+  const {
+    locale
+  } = useContext(AppContext);
 
-  useEffect(() => {
-    if (timetableEventsApiUrl) {
-      fetchEventDetails();
-    }
-  }, [timetableEventsApiUrl, providerId, auth]);
+  if (isLoading) {
+    return <Loader>Loading events...</Loader>;
+  }
 
-  return loading ? (
-      <Loader>Loading events...</Loader>
-    ) : (
-      <EventDetails
-        handleRefresh={() => fetchEventDetails()}
-        navigate={() => {}} // todo: implement
-        locale="en"
-        dataSource={eventDetails}
-        showDateFilter
-        showNewDeliveriesFilter
-        hideIgnoredExportNetexBlocks={false}
-        hideAntuValidationSteps={false}
-      />
-    );
+  if (isError) {
+    return <span>Error: {error?.message}</span>;
+  }
+
+  return <>
+    <EventDetails
+      navigate={() => {}} // todo: implement
+      locale={locale}
+      dataSource={data}
+      showDateFilter
+      showNewDeliveriesFilter
+      hideIgnoredExportNetexBlocks={false}
+      hideAntuValidationSteps={false}
+    />
+  </>;
 }

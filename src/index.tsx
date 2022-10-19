@@ -1,9 +1,23 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM, { createRoot } from 'react-dom/client';
 import {AppShellStandalone} from './AppShellStandalone';
 import reportWebVitals from './reportWebVitals';
 
 import './index.css';
+import { registerMicroFrontend } from '@entur/micro-frontend';
+import { App, AppProps } from './App';
+
+registerMicroFrontend<AppProps>({
+  microFrontendId: 'ror-zagmuk',
+  mount: (mountPoint, payload) => {
+    const root = createRoot(mountPoint as Element);
+    root.render(<App {...payload} />);
+  },
+  unmount: (mountPoint) => {
+    const root = createRoot(mountPoint as Element);
+    root.unmount();
+  },
+});
 
 if (process.env.REACT_APP_STANDALONE) {
   const root = ReactDOM.createRoot(document.getElementById('root') as Element);

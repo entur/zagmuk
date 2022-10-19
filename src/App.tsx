@@ -3,17 +3,21 @@ import { DefaultPayload } from '@entur/micro-frontend';
 import * as Sentry from '@sentry/react';
 import { BrowserTracing } from '@sentry/tracing';
 import { ConfigContext, useConfigProviderValue } from './config/config';
-//import { IntlProvider } from 'react-intl';
-//import { useLocaleData } from './hooks/useLocaleData';
 import { ConnectedEventDetails } from './components/ConnectedEventDetails';
 
 import './App.css';
+import { UploadAndValidation } from './components/UploadAndValidation';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
-interface AppProps extends DefaultPayload {}
+const queryClient = new QueryClient()
+
+export interface AppProps extends DefaultPayload {}
+
+export const AppContext = React.createContext<AppProps>({});
 
 export function App(props: AppProps) {
   const { config, loading } = useConfigProviderValue(props.env!);
-  // const localeData = useLocaleData(props.locale!);
 
   Sentry.init({
     dsn: config.sentryDSN,
@@ -31,17 +35,17 @@ export function App(props: AppProps) {
     <React.StrictMode>
       {!loading && (
         <ConfigContext.Provider value={config}>
-          {/* <IntlProvider
-            messages={localeData}
-            locale={props.locale!}
-            defaultLocale="en"
-          > */}
-                <div className="zagmuk-app">
-                  <div className="zagmuk-app-content">
-                    <ConnectedEventDetails providerId={props.providerId} />
-                  </div>
+          <AppContext.Provider value={props}>
+            <QueryClientProvider client={queryClient}>
+              <div className="zagmuk-app">
+                <div className="zagmuk-app-content">
+                  <UploadAndValidation />
+                  <ConnectedEventDetails />
                 </div>
-          {/* </IntlProvider> */}
+              </div>
+              <ReactQueryDevtools initialIsOpen={false} />
+            </QueryClientProvider>
+          </AppContext.Provider>
         </ConfigContext.Provider>
       )}
     </React.StrictMode>

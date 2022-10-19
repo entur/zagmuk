@@ -1,6 +1,4 @@
 import React from 'react';
-import { RefreshIcon } from '@entur/icons'
-import { FloatingButton } from '@entur/button';
 import { Pagination } from '@entur/menu';
 import { Dropdown } from '@entur/dropdown';
 import { Checkbox } from '@entur/form';
@@ -149,21 +147,11 @@ class EventDetails extends React.Component {
 
     const page = paginationMap[activePageIndex - 1];
 
-    const refreshButton = this.props.handleRefresh && (
-        <FloatingButton size="small" onClick={() => this.props.handleRefresh()}>
-          <RefreshIcon />
-          {translations[locale].refresh}
-        </FloatingButton>
-    );
-
     if (page && page.length && paginationMap) {
       return (
         <div>
           <div style={{ width: '100%', textAlign: 'left', marginBottom: 5 }}>
             {filters}
-          </div>
-          <div style={{ marginRight: 15, float: 'right' }}>
-            {refreshButton}
           </div>
           <div className="page-link-parent">
             <Pagination
@@ -227,7 +215,6 @@ class EventDetails extends React.Component {
             <div style={{ fontWeight: 600 }}>
               {translations[locale].no_status}
             </div>
-            <div style={{ marginLeft: 10 }}>{refreshButton}</div>
           </div>
         </div>
       );
