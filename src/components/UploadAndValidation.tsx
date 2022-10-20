@@ -8,22 +8,31 @@ import { FileUploadDialog } from "./FileUploadDialog";
 export const UploadAndValidation = () => {
   const { providerId } = useContext(AppContext);
   const [fileUploadDialogOpen, setFileUploadDialogOpen] = useState(false);
-  const [confirmValidateDialogOpen, setConfirmValidateDialogOpen] = useState(false);
+  const [confirmValidateDialogOpen, setConfirmValidateDialogOpen] =
+    useState(false);
 
   if (!providerId) {
     return null;
   }
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-between'}}>
+    <div style={{ display: "flex", justifyContent: "space-between" }}>
       <ButtonGroup>
         <SecondaryButton onClick={() => setFileUploadDialogOpen(true)}>
           Last opp nytt datasett <UploadIcon />
         </SecondaryButton>
-        <SecondaryButton onClick={() => setConfirmValidateDialogOpen(true)}>Valider datasett</SecondaryButton>
+        <SecondaryButton onClick={() => setConfirmValidateDialogOpen(true)}>
+          Valider datasett
+        </SecondaryButton>
       </ButtonGroup>
-      <FileUploadDialog isModalOpen={fileUploadDialogOpen} setModalOpen={setFileUploadDialogOpen} />
-      <ConfirmValidateDialog open={confirmValidateDialogOpen} handleClose={() => setConfirmValidateDialogOpen(false)} />
+      <FileUploadDialog
+        isModalOpen={fileUploadDialogOpen}
+        setModalOpen={setFileUploadDialogOpen}
+      />
+      <ConfirmValidateDialog
+        open={confirmValidateDialogOpen}
+        handleClose={() => setConfirmValidateDialogOpen(false)}
+      />
     </div>
   );
 };

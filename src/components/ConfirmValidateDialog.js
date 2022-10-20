@@ -21,26 +21,27 @@ import { Paragraph } from "@entur/typography";
 import { useValidateDatasetMutation } from "./useValidateDatasetMutation";
 
 export const ConfirmValidateDialog = ({ open, handleClose }) => {
-
-  const { mutation} = useValidateDatasetMutation();
+  const { mutation } = useValidateDatasetMutation();
 
   const onConfirm = useCallback(() => {
     mutation.mutate();
     handleClose();
   }, [mutation, handleClose]);
 
-    return (
-      <Modal
-        title={"Validere datasett"}
-        open={open}
-        onDismiss={handleClose}
-        size="small"
-      >
-        <Paragraph>Er du sikker på at du vil validere ditt datasett nå?</Paragraph>
-        <ButtonGroup>
-          <SecondaryButton onClick={handleClose}>Avbryt</SecondaryButton>
-          <PrimaryButton onClick={() => onConfirm()}>Valider</PrimaryButton>
-        </ButtonGroup>
-      </Modal>
-    );
-  }
+  return (
+    <Modal
+      title={"Validere datasett"}
+      open={open}
+      onDismiss={handleClose}
+      size="small"
+    >
+      <Paragraph>
+        Er du sikker på at du vil validere ditt datasett nå?
+      </Paragraph>
+      <ButtonGroup>
+        <SecondaryButton onClick={handleClose}>Avbryt</SecondaryButton>
+        <PrimaryButton onClick={() => onConfirm()}>Valider</PrimaryButton>
+      </ButtonGroup>
+    </Modal>
+  );
+};

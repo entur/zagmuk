@@ -1,7 +1,6 @@
 import React from "react";
 import { Pagination } from "@entur/menu";
-import { Dropdown } from "@entur/dropdown";
-import { Checkbox, Switch } from "@entur/form";
+import { Switch } from "@entur/form";
 import EventStepper from "./EventStepper";
 import translations from "./translations";
 import FilterButtonTray from "./FilterButtonTray";
@@ -103,46 +102,46 @@ class EventDetails extends React.Component {
 
     const filters = (
       <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <FilterButtonTray
-            label="Status"
-            locale={locale}
-            style={{ marginRight: "1rem", marginLeft: "1rem" }}
-            activeButtonId={endStateFilter}
-            onChange={(selectedItem) => {
-              this.setState({
-                endStateFilter: selectedItem,
-                activePageIndex: 1,
-              })
-            }}
-            buttonConfig={{
-              fields: [
-                {
-                  id: "ALL",
-                },
-                {
-                  id: "OK",
-                },
-                {
-                  id: "CANCELLED",
-                },
-                {
-                  id: "FAILED",
-                },
-              ]
-            }}
-            translationKey="states"
-          />
-        
+        <FilterButtonTray
+          label="Status"
+          locale={locale}
+          style={{ marginRight: "1rem", marginLeft: "1rem" }}
+          activeButtonId={endStateFilter}
+          onChange={(selectedItem) => {
+            this.setState({
+              endStateFilter: selectedItem,
+              activePageIndex: 1,
+            });
+          }}
+          buttonConfig={{
+            fields: [
+              {
+                id: "ALL",
+              },
+              {
+                id: "OK",
+              },
+              {
+                id: "CANCELLED",
+              },
+              {
+                id: "FAILED",
+              },
+            ],
+          }}
+          translationKey="states"
+        />
+
         {showDateFilter && (
-            <FilterButtonTray
-              label="Uploaded"
-              locale={locale}
-              style={{ marginLeft: 20 }}
-              activeButtonId={this.state.dateFilter}
-              onChange={this.handleFilterChange.bind(this)}
-              buttonConfig={buttonConfig}
-              translationKey="filterButton"
-            />
+          <FilterButtonTray
+            label="Uploaded"
+            locale={locale}
+            style={{ marginLeft: 20 }}
+            activeButtonId={this.state.dateFilter}
+            onChange={this.handleFilterChange.bind(this)}
+            buttonConfig={buttonConfig}
+            translationKey="filterButton"
+          />
         )}
 
         {showNewDeliveriesFilter && (
@@ -171,9 +170,7 @@ class EventDetails extends React.Component {
     if (page && page.length && paginationMap) {
       return (
         <div>
-          <div style={{ width: "100%", marginBottom: "2rem" }}>
-            {filters}
-          </div>
+          <div style={{ width: "100%", marginBottom: "2rem" }}>{filters}</div>
           <div className="page-link-parent">
             <Pagination
               pageCount={Math.ceil(filteredSource.length / 10)}

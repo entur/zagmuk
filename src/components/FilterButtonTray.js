@@ -5,7 +5,14 @@ import translations from "./actionTranslations";
 
 class FilterButtonTray extends Component {
   render() {
-    const { label, locale, activeButtonId, onChange, buttonConfig, translationKey } = this.props;
+    const {
+      label,
+      locale,
+      activeButtonId,
+      onChange,
+      buttonConfig,
+      translationKey,
+    } = this.props;
 
     return (
       <div style={this.props.style}>

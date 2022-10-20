@@ -20,14 +20,17 @@ import { PrimaryButton } from "@entur/button";
 import { CheckIcon, ValidationErrorIcon } from "@entur/icons";
 import { Loader } from "@entur/loader";
 import "./fileUpload.css";
-import { FileUploadState, useFileUploadMutation } from "./useFileUploadMutation";
+import {
+  FileUploadState,
+  useFileUploadMutation,
+} from "./useFileUploadMutation";
 
 const formatFileSize = (size: number) => {
   if (size > 1024) {
     return `${(size / 1024).toFixed(2)} Mb`;
   }
   return `${size.toFixed(2)} Kb`;
-}
+};
 
 interface Props {
   isModalOpen: boolean;
@@ -35,119 +38,119 @@ interface Props {
 }
 
 export const FileUploadDialog = ({ isModalOpen, setModalOpen }: Props) => {
-    const { mutation, progress, fileUploadState } = useFileUploadMutation();
-    const {acceptedFiles, getRootProps, getInputProps} = useDropzone({
-      accept: {
-        'application/zip': [".zip",".rar"]
-      },
-      multiple: true,
-    });
-    
+  const { mutation, progress, fileUploadState } = useFileUploadMutation();
+  const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
+    accept: {
+      "application/zip": [".zip", ".rar"],
+    },
+    multiple: true,
+  });
 
-    const totalFileSize = acceptedFiles.length
-      ? acceptedFiles.map((file) => file.size / 1024).reduce((f1, f2) => f1 + f2)
-      : 0;
+  const totalFileSize = acceptedFiles.length
+    ? acceptedFiles.map((file) => file.size / 1024).reduce((f1, f2) => f1 + f2)
+    : 0;
 
-    return (
-        <Modal
-          open={isModalOpen}
-          onDismiss={() => setModalOpen(false)}
-          title="Last opp nytt datasett"
-          size="medium">
-        <div {...getRootProps({className: 'dropzone'})}>
-          <input {...getInputProps()} />
-          <p>Slipp filer her, eller klikk her for å velge filer som skal lastes
-          opp som et nytt datasett. Kun filer på formatet zip og rar er
-          støttet.</p>
-        </div>
-        <div className="filelist">
-          <select className="file-select" multiple>
-            {acceptedFiles.map((file, index) => {
-              return <option key={"file-" + index}>{file.name}</option>;
-            })}
-          </select>
-        </div>
-        {fileUploadState === FileUploadState.COMPLETED ? (
-          <div
-            style={{
-              maxWidth: "65%",
-              margin: "20px auto",
-              display: "flex",
-              padding: 10,
-              background: "rgba(0, 128, 0, 0.1)",
-              alignItems: "middle",
-            }}
-          >
-            <CheckIcon color="green" />{" "}
-            <div
-              style={{
-                marginLeft: 5,
-                textTransform: "uppercase",
-                position: "relative",
-                top: 3,
-              }}
-            >
-              Datasett er lastet opp
-            </div>
-          </div>
-        ) : null}
-        {fileUploadState === FileUploadState.FAILED ? (
-          <div
-            style={{
-              maxWidth: "65%",
-              textAlign: "center",
-              margin: "20px auto",
-              display: "flex",
-              padding: 10,
-              background: "rgba(255, 0, 0, 0.05)",
-              alignItems: "middle",
-            }}
-          >
-            <ValidationErrorIcon color="red" />{" "}
-            <div
-              style={{
-                marginLeft: 5,
-                textTransform: "uppercase",
-                position: "relative",
-                top: 3,
-              }}
-            >
-              Feil ved opplasting av datasett
-            </div>
-          </div>
-        ) : null}
-        <div style={{ maxWidth: "75%", margin: "20px auto" }}>
-          {fileUploadState !== FileUploadState.NOT_STARTED ? (
-            <Loader progress={progress} />
-          ) : null}
-        </div>
+  return (
+    <Modal
+      open={isModalOpen}
+      onDismiss={() => setModalOpen(false)}
+      title="Last opp nytt datasett"
+      size="medium"
+    >
+      <div {...getRootProps({ className: "dropzone" })}>
+        <input {...getInputProps()} />
+        <p>
+          Slipp filer her, eller klikk her for å velge filer som skal lastes opp
+          som et nytt datasett. Kun filer på formatet zip og rar er støttet.
+        </p>
+      </div>
+      <div className="filelist">
+        <select className="file-select" multiple>
+          {acceptedFiles.map((file, index) => {
+            return <option key={"file-" + index}>{file.name}</option>;
+          })}
+        </select>
+      </div>
+      {fileUploadState === FileUploadState.COMPLETED ? (
         <div
           style={{
-            padding: 10,
+            maxWidth: "65%",
+            margin: "20px auto",
             display: "flex",
-            justifyContent: "space-between",
-            marginBottom: 10,
+            padding: 10,
+            background: "rgba(0, 128, 0, 0.1)",
+            alignItems: "middle",
           }}
         >
+          <CheckIcon color="green" />{" "}
           <div
             style={{
-              fontSize: "0.9em",
-              visibility: totalFileSize ? "visible" : "hidden",
+              marginLeft: 5,
+              textTransform: "uppercase",
+              position: "relative",
+              top: 3,
             }}
           >
-            Total størrelse: {formatFileSize(totalFileSize)}
+            Datasett er lastet opp
           </div>
-          <PrimaryButton
-            style={{ marginRight: 10 }}
-            disabled={!acceptedFiles.length}
-            onClick={() => {
-              mutation.mutate(acceptedFiles);
-            }
-          }
-          >
-            Last opp datasett
-          </PrimaryButton>
         </div>
-        </Modal>
-    );
-  }
+      ) : null}
+      {fileUploadState === FileUploadState.FAILED ? (
+        <div
+          style={{
+            maxWidth: "65%",
+            textAlign: "center",
+            margin: "20px auto",
+            display: "flex",
+            padding: 10,
+            background: "rgba(255, 0, 0, 0.05)",
+            alignItems: "middle",
+          }}
+        >
+          <ValidationErrorIcon color="red" />{" "}
+          <div
+            style={{
+              marginLeft: 5,
+              textTransform: "uppercase",
+              position: "relative",
+              top: 3,
+            }}
+          >
+            Feil ved opplasting av datasett
+          </div>
+        </div>
+      ) : null}
+      <div style={{ maxWidth: "75%", margin: "20px auto" }}>
+        {fileUploadState !== FileUploadState.NOT_STARTED ? (
+          <Loader progress={progress} />
+        ) : null}
+      </div>
+      <div
+        style={{
+          padding: 10,
+          display: "flex",
+          justifyContent: "space-between",
+          marginBottom: 10,
+        }}
+      >
+        <div
+          style={{
+            fontSize: "0.9em",
+            visibility: totalFileSize ? "visible" : "hidden",
+          }}
+        >
+          Total størrelse: {formatFileSize(totalFileSize)}
+        </div>
+        <PrimaryButton
+          style={{ marginRight: 10 }}
+          disabled={!acceptedFiles.length}
+          onClick={() => {
+            mutation.mutate(acceptedFiles);
+          }}
+        >
+          Last opp datasett
+        </PrimaryButton>
+      </div>
+    </Modal>
+  );
+};
