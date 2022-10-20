@@ -2,13 +2,12 @@ import React from "react";
 import { DefaultPayload } from "@entur/micro-frontend";
 import * as Sentry from "@sentry/react";
 import { BrowserTracing } from "@sentry/tracing";
-import { ConfigContext, useConfigProviderValue } from "./config/config";
-import { ConnectedEventDetails } from "./components/ConnectedEventDetails";
-
-import "./App.css";
-import { UploadAndValidation } from "./components/UploadAndValidation";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { ConfigContext, useConfigProviderValue } from "./config/config";
+import { ConnectedEventDetails } from "./components/ConnectedEventDetails";
+import { UploadAndValidation } from "./components/UploadAndValidation";
+import "./App.css";
 
 const queryClient = new QueryClient();
 
@@ -38,7 +37,7 @@ export function App(props: AppProps) {
           <AppContext.Provider value={props}>
             <QueryClientProvider client={queryClient}>
               <div className="zagmuk-app">
-                <div className="zagmuk-app-content">
+                <div className="zagmuk-app-content card">
                   <UploadAndValidation />
                   <ConnectedEventDetails />
                 </div>

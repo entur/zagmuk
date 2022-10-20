@@ -15,7 +15,7 @@ export const UploadAndValidation = () => {
   }
 
   return (
-    <>
+    <div style={{ display: 'flex', justifyContent: 'center'}}>
       <ButtonGroup>
         <SecondaryButton onClick={() => setFileUploadDialogOpen(true)}>
           Last opp nytt datasett <UploadIcon />
@@ -24,6 +24,6 @@ export const UploadAndValidation = () => {
       </ButtonGroup>
       <FileUploadDialog isModalOpen={fileUploadDialogOpen} setModalOpen={setFileUploadDialogOpen} />
       <ConfirmValidateDialog open={confirmValidateDialogOpen} handleClose={() => setConfirmValidateDialogOpen(false)} />
-    </>
+    </div>
   );
 };
