@@ -14,14 +14,20 @@
  *
  */
 
-import React, { Component } from "react";
+import { useCallback } from "react";
 import { Modal } from "@entur/modal";
 import { ButtonGroup, PrimaryButton, SecondaryButton } from "@entur/button";
 import { Paragraph } from "@entur/typography";
+import { useValidateDatasetMutation } from "./ useValidateDatasetMutation";
 
-export class ConfirmValidateDialog extends Component {
-  render() {
-    const { open, handleClose } = this.props;
+export const ConfirmValidateDialog = ({ open, handleClose }) => {
+
+  const { mutation} = useValidateDatasetMutation();
+
+  const onConfirm = useCallback(() => {
+    mutation.mutate();
+    handleClose();
+  }, [mutation, handleClose]);
 
     return (
       <Modal
@@ -33,9 +39,8 @@ export class ConfirmValidateDialog extends Component {
         <Paragraph>Er du sikker på at du vil validere ditt datasett nå?</Paragraph>
         <ButtonGroup>
           <SecondaryButton onClick={handleClose}>Avbryt</SecondaryButton>
-          <PrimaryButton onClick={() => {}}>Valider</PrimaryButton>
+          <PrimaryButton onClick={() => onConfirm()}>Valider</PrimaryButton>
         </ButtonGroup>
       </Modal>
     );
   }
-}

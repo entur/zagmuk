@@ -1,12 +1,19 @@
 import { ButtonGroup, SecondaryButton } from "@entur/button";
 import { UploadIcon } from "@entur/icons";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AppContext } from "../App";
 import { ConfirmValidateDialog } from "./ConfirmValidateDialog";
 import { FileUploadDialog } from "./FileUploadDialog";
 
 export const UploadAndValidation = () => {
+  const { providerId } = useContext(AppContext);
   const [fileUploadDialogOpen, setFileUploadDialogOpen] = useState(false);
   const [confirmValidateDialogOpen, setConfirmValidateDialogOpen] = useState(false);
+
+  if (!providerId) {
+    return null;
+  }
+
   return (
     <>
       <ButtonGroup>
