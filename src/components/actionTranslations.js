@@ -50,6 +50,7 @@ const translations = {
       undefined: "Validering",
     },
     states: {
+      ALL: "Alle",
       OK: "Fullført",
       PENDING: "Venter",
       STARTED: "Påbegynt",
@@ -124,6 +125,7 @@ const translations = {
       undefined: "Validation",
     },
     states: {
+      ALL: "All",
       OK: "Completed",
       PENDING: "Pending",
       STARTED: "Started",

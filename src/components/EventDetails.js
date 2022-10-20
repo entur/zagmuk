@@ -1,12 +1,14 @@
 import React from "react";
 import { Pagination } from "@entur/menu";
 import { Dropdown } from "@entur/dropdown";
-import { Checkbox } from "@entur/form";
+import { Checkbox, Switch } from "@entur/form";
 import EventStepper from "./EventStepper";
 import translations from "./translations";
 import FilterButtonTray from "./FilterButtonTray";
-import { getLastValidDate } from "./buttonConfig";
+import buttonConfig, { getLastValidDate } from "./buttonConfig";
 import "./EventDetails.css";
+import { Label } from "@entur/typography";
+import { UploadAndValidation } from "./UploadAndValidation";
 
 class EventDetails extends React.Component {
   constructor(props) {
@@ -100,43 +102,53 @@ class EventDetails extends React.Component {
     const paginationMap = getPaginationMap(filteredSource);
 
     const filters = (
-      <div style={{ display: "flex", alignItems: "center" }}>
-        <div style={{ minWidth: "12.5rem" }}>
-          <Dropdown
-            label={translations[locale].show}
-            value={endStateFilter}
-            onChange={(selectedItem) =>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <FilterButtonTray
+            label="Status"
+            locale={locale}
+            style={{ marginRight: "1rem", marginLeft: "1rem" }}
+            activeButtonId={endStateFilter}
+            onChange={(selectedItem) => {
               this.setState({
-                endStateFilter: selectedItem.value,
+                endStateFilter: selectedItem,
                 activePageIndex: 1,
               })
-            }
-            items={[
-              { label: translations[locale].show_all, value: "ALL" },
-              { label: translations[locale].show_only_success, value: "OK" },
-              {
-                label: translations[locale].show_only_cancelled,
-                value: "CANCELLED",
-              },
-              { label: translations[locale].show_only_failed, value: "FAILED" },
-            ]}
+            }}
+            buttonConfig={{
+              fields: [
+                {
+                  id: "ALL",
+                },
+                {
+                  id: "OK",
+                },
+                {
+                  id: "CANCELLED",
+                },
+                {
+                  id: "FAILED",
+                },
+              ]
+            }}
+            translationKey="states"
           />
-        </div>
-
+        
         {showDateFilter && (
-          <div>
             <FilterButtonTray
+              label="Uploaded"
               locale={locale}
               style={{ marginLeft: 20 }}
               activeButtonId={this.state.dateFilter}
               onChange={this.handleFilterChange.bind(this)}
+              buttonConfig={buttonConfig}
+              translationKey="filterButton"
             />
-          </div>
         )}
 
         {showNewDeliveriesFilter && (
-          <div style={{ marginLeft: 10 }}>
-            <Checkbox
+          <div style={{ marginLeft: "1rem" }}>
+            <Label>{translations[locale].filter_direct_delivery}</Label>
+            <Switch
               checked={onlyNewDeliveryFilter}
               onChange={(e) => {
                 this.setState({
@@ -144,11 +156,13 @@ class EventDetails extends React.Component {
                   activePageIndex: 1,
                 });
               }}
-            >
-              {translations[locale].filter_direct_delivery}
-            </Checkbox>
+            />
           </div>
         )}
+
+        <div style={{ marginLeft: "1rem" }}>
+          <UploadAndValidation />
+        </div>
       </div>
     );
 
@@ -157,7 +171,7 @@ class EventDetails extends React.Component {
     if (page && page.length && paginationMap) {
       return (
         <div>
-          <div style={{ width: "100%", textAlign: "left", marginBottom: 5 }}>
+          <div style={{ width: "100%", marginBottom: "2rem" }}>
             {filters}
           </div>
           <div className="page-link-parent">

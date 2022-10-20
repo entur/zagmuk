@@ -15,7 +15,7 @@ export const UploadAndValidation = () => {
   }
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center'}}>
+    <div style={{ display: 'flex', justifyContent: 'space-between'}}>
       <ButtonGroup>
         <SecondaryButton onClick={() => setFileUploadDialogOpen(true)}>
           Last opp nytt datasett <UploadIcon />

@@ -38,7 +38,6 @@ export function App(props: AppProps) {
             <QueryClientProvider client={queryClient}>
               <div className="zagmuk-app">
                 <div className="zagmuk-app-content card">
-                  <UploadAndValidation />
                   <ConnectedEventDetails />
                 </div>
               </div>
