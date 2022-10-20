@@ -6,7 +6,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ConfigContext, useConfigProviderValue } from "./config/config";
 import { ConnectedEventDetails } from "./components/ConnectedEventDetails";
-import { UploadAndValidation } from "./components/UploadAndValidation";
 import "./App.css";
 
 const queryClient = new QueryClient();
