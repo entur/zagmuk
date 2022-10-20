@@ -22,7 +22,10 @@ export const useEvents = () => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
-      return await response.json();
+      const events = await response.json();
+      return events
+        .sort((a: any, b: any) => a.firstEvent - b.firstEvent)
+        .reverse();
     },
     {
       refetchInterval: REFRESH_INTERVAL_MS,

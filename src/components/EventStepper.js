@@ -5,6 +5,11 @@ import { DownArrowIcon, UpArrowIcon } from "@entur/icons";
 import ControlledLink from "./ControlledLink";
 import translations from "./translations";
 import EventStatusIcon from "./EventStatusIcon";
+import formatDistanceToNow from "date-fns/formatDistanceToNow";
+import format from "date-fns/format";
+import { nb } from 'date-fns/locale'
+import formatDuration from "date-fns/formatDuration";
+import * as duration from 'duration-fns'
 
 const NETEX_BLOCKS_EVENTS = [
   "EXPORT_NETEX_BLOCKS",
@@ -242,7 +247,7 @@ class EventStepper extends React.Component {
     let toolTipText = ActionTranslations[locale].states[event.endState];
 
     if (event.states && event.states[groups[group].states.length - 1]) {
-      toolTipText += " " + event.states[event.states.length - 1].date;
+      toolTipText += " " + format(new Date(event.states[event.states.length - 1].date), 'Pp', { locale: nb });
     }
 
     if (event.errorOn) {
@@ -252,26 +257,26 @@ class EventStepper extends React.Component {
     return (
       <div style={groupStyle} key={"group-" + group + index}>
         {!isFirst && <div style={linkStyle} />}
-        <div
-          title={toolTipText}
-          style={{ opacity: event.missingBeforeStartStart ? 0.2 : 1 }}
-        >
-          <EventStatusIcon state={event.endState} />
-        </div>
-        <div
-          style={{
-            ...groupText,
-            opacity: event.missingBeforeStartStart ? 0.2 : 1,
-          }}
-        >
-          <ControlledLink
-            includeLevel2={includeLevel2}
-            events={event}
-            navigate={this.props.navigate}
+          <div
+            title={toolTipText}
+            style={{ opacity: event.missingBeforeStartStart ? 0.2 : 1 }}
           >
-            {ActionTranslations[locale].text[group]}
-          </ControlledLink>
-        </div>
+            <EventStatusIcon state={event.endState} />
+          </div>
+          <div
+            style={{
+              ...groupText,
+              opacity: event.missingBeforeStartStart ? 0.2 : 1,
+            }}
+          >
+            <ControlledLink
+              includeLevel2={includeLevel2}
+              events={event}
+              navigate={this.props.navigate}
+            >
+              {ActionTranslations[locale].text[group]}
+            </ControlledLink>
+          </div>
       </div>
     );
   }
@@ -331,7 +336,7 @@ class EventStepper extends React.Component {
               marginRight: 20,
             }}
           >
-            {listItem.started}
+            {formatDistanceToNow(new Date(listItem.firstEvent), {locale: nb})}
           </div>
           {listItem.provider && listItem.provider.name && (
             <div style={{ fontSize: "0.8em", fontWeight: 600, flex: 1 }}>
@@ -375,19 +380,19 @@ class EventStepper extends React.Component {
               <span style={{ fontWeight: 600, marginRight: 10 }}>
                 {translations[locale].started}
               </span>
-              {listItem.firstEvent}
+              {format(new Date(listItem.firstEvent), 'PPpp', {locale: nb})}
             </div>
             <div>
               <span style={{ fontWeight: 600, marginRight: 10 }}>
                 {translations[locale].ended}
               </span>
-              {listItem.lastEvent}
+              {format(new Date(listItem.lastEvent), 'PPpp', {locale: nb})}
             </div>
             <div>
               <span style={{ fontWeight: 600, marginRight: 10 }}>
                 {translations[locale].duration}
               </span>
-              {listItem.duration}
+              {formatDuration(duration.normalize({ milliseconds: listItem.durationMillis }), {locale: nb})}
             </div>
             <div>
               <span style={{ fontWeight: 600, marginRight: 10 }}>

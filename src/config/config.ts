@@ -7,6 +7,7 @@ export interface Config {
   udugBaseUrl?: string;
   chouetteBaseUrl?: string;
   timetableEventsApiUrl?: string;
+  timetableAdminApiUrl?: string;
 }
 
 export const ConfigContext = createContext<Config>(globalConfig);
