@@ -1,4 +1,4 @@
-import { ButtonGroup, SecondaryButton } from "@entur/button";
+import { ButtonGroup, PrimaryButton, SecondaryButton } from "@entur/button";
 import { UploadIcon } from "@entur/icons";
 import { useContext, useState } from "react";
 import { AppContext } from "../App";
@@ -18,9 +18,9 @@ export const UploadAndValidation = () => {
   return (
     <div style={{ display: "flex", justifyContent: "space-between" }}>
       <ButtonGroup>
-        <SecondaryButton onClick={() => setFileUploadDialogOpen(true)}>
+        <PrimaryButton onClick={() => setFileUploadDialogOpen(true)}>
           Last opp nytt datasett <UploadIcon />
-        </SecondaryButton>
+        </PrimaryButton>
         <SecondaryButton onClick={() => setConfirmValidateDialogOpen(true)}>
           Valider datasett
         </SecondaryButton>
