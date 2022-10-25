@@ -1,6 +1,3 @@
-import React, { Component } from "react";
-import { SegmentedControl, SegmentedChoice } from "@entur/form";
-
 import translations from "./actionTranslations";
 import { ChoiceChip, ChoiceChipGroup } from "@entur/chip";
 import { useRandomId } from "@entur/utils";
