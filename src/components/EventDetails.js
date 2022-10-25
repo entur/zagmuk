@@ -7,7 +7,6 @@ import FilterButtonTray from "./FilterButtonTray";
 import buttonConfig, { getLastValidDate } from "./buttonConfig";
 import "./EventDetails.css";
 import { Label } from "@entur/typography";
-import { UploadAndValidation } from "./UploadAndValidation";
 
 class EventDetails extends React.Component {
   constructor(props) {
@@ -101,11 +100,10 @@ class EventDetails extends React.Component {
     const paginationMap = getPaginationMap(filteredSource);
 
     const filters = (
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <div style={{ display: "flex", flexDirection: "column"  }}>
         <FilterButtonTray
           label="Status"
           locale={locale}
-          style={{ marginRight: "1rem", marginLeft: "1rem" }}
           activeButtonId={endStateFilter}
           onChange={(selectedItem) => {
             this.setState({
@@ -136,7 +134,6 @@ class EventDetails extends React.Component {
           <FilterButtonTray
             label="Uploaded"
             locale={locale}
-            style={{ marginLeft: 20 }}
             activeButtonId={this.state.dateFilter}
             onChange={this.handleFilterChange.bind(this)}
             buttonConfig={buttonConfig}
@@ -158,10 +155,6 @@ class EventDetails extends React.Component {
             />
           </div>
         )}
-
-        <div style={{ marginLeft: "1rem" }}>
-          <UploadAndValidation />
-        </div>
       </div>
     );
 

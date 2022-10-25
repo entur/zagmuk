@@ -5,6 +5,7 @@
   "dependencies": {
     "@auth0/auth0-react": "1.11.0",
     "@entur/button": "2.10.4",
+    "@entur/chip": "^0.6.10",
     "@entur/dropdown": "3.0.16",
     "@entur/fileupload": "0.3.49",
     "@entur/form": "5.4.4",
@@ -16,6 +17,7 @@
     "@entur/modal": "1.6.10",
     "@entur/tokens": "3.4.1",
     "@entur/typography": "1.7.0",
+    "@entur/utils": "^0.4.5",
     "@sentry/react": "7.14.1",
     "@sentry/tracing": "7.14.1",
     "@tanstack/react-query": "^4.12.0",

@@ -7,6 +7,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ConfigContext, useConfigProviderValue } from "./config/config";
 import { ConnectedEventDetails } from "./components/ConnectedEventDetails";
 import "./App.css";
+import { UploadAndValidation } from "./components/UploadAndValidation";
 
 const queryClient = new QueryClient();
 
@@ -37,6 +38,9 @@ export function App(props: AppProps) {
             <QueryClientProvider client={queryClient}>
               <div className="zagmuk-app">
                 <div className="zagmuk-app-content card">
+                <div style={{ marginLeft: "1rem" }}>
+                  <UploadAndValidation />
+                </div>
                   <ConnectedEventDetails />
                 </div>
               </div>

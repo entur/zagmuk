@@ -2,38 +2,37 @@ import React, { Component } from "react";
 import { SegmentedControl, SegmentedChoice } from "@entur/form";
 
 import translations from "./actionTranslations";
+import { ChoiceChip, ChoiceChipGroup } from "@entur/chip";
+import { useRandomId } from "@entur/utils";
 
-class FilterButtonTray extends Component {
-  render() {
-    const {
-      label,
-      locale,
-      activeButtonId,
-      onChange,
-      buttonConfig,
-      translationKey,
-    } = this.props;
-
+const FilterButtonTray = ({
+  label,
+  locale,
+  activeButtonId,
+  onChange,
+  buttonConfig,
+  translationKey,
+}) => {
+  const id = useRandomId();
     return (
-      <div style={this.props.style}>
-        <SegmentedControl
+      <div style={{ marginRight: "1rem", marginLeft: "1rem", marginBottom: "20px" }}>
+        <ChoiceChipGroup
+          name={id}
           label={label}
-          onChange={(selectedValue) => onChange(selectedValue)}
-          selectedValue={activeButtonId}
+          onChange={(e) => onChange(e.target.value)}
+          value={activeButtonId}
         >
           {buttonConfig.fields.map((field) => (
-            <SegmentedChoice
+            <ChoiceChip
               key={field.id}
               value={field.id}
-              style={{ whiteSpace: "nowrap" }}
             >
               {translations[locale][translationKey][field.id]}
-            </SegmentedChoice>
+            </ChoiceChip>
           ))}
-        </SegmentedControl>
+        </ChoiceChipGroup>
       </div>
     );
   }
-}
 
 export default FilterButtonTray;
