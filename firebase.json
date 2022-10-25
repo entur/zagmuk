@@ -23,6 +23,19 @@
           {
             "key": "Access-Control-Allow-Headers",
             "value": "*"
+          },
+          {
+            "key": "Cache-Control",
+            "value": "max-age=31536000"
+          }
+        ]
+      },
+      {
+        "source": "asset-manifest.json",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=60"
           }
         ]
       }
