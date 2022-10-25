@@ -2,4 +2,4 @@
 
 > It celebrates the triumph of Marduk
 
-A frontend application to display data pipeline events from [nabu](https://github.com/entur/nabu).
+A frontend application to display data pipeline events from [nabu](https://github.com/entur/nabu), and to upload and validate datasets.
