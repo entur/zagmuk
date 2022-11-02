@@ -13,7 +13,6 @@
 @import "@entur/tokens/dist/styles.css";
 @import "@entur/loader/dist/styles.css";
 @import "@entur/modal/dist/styles.css";
-@import "@entur/chip/dist/styles.css";
 
 body {
   margin: 0;
