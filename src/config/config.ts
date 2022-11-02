@@ -12,7 +12,7 @@ export interface Config {
 
 export const ConfigContext = createContext<Config>(globalConfig);
 
-const getConfig = async (env: string="dev"): Promise<Config> => {
+const getConfig = async (env: string = "dev"): Promise<Config> => {
   const { default: config } = await import(`./environments/${env}.json`);
   return Object.assign({}, globalConfig, config);
 };
