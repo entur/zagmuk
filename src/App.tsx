@@ -11,9 +11,17 @@ import { UploadAndValidation } from "./components/UploadAndValidation";
 
 const queryClient = new QueryClient();
 
-export interface AppProps extends DefaultPayload {}
+export interface AppProps extends DefaultPayload {
+  hideIgnoredExportNetexBlocks?: boolean;
+  hideAntuValidationSteps?: boolean;
+  navigate?: (url: string) => void;
+}
 
-export const AppContext = React.createContext<AppProps>({});
+export const AppContext = React.createContext<AppProps>({
+  hideIgnoredExportNetexBlocks: true,
+  hideAntuValidationSteps: false,
+  navigate: () => {}
+});
 
 export function App(props: AppProps) {
   const { config, loading } = useConfigProviderValue(props.env!);

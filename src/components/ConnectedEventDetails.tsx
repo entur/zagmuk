@@ -7,7 +7,7 @@ import { useEvents } from "./useEvents";
 export const ConnectedEventDetails = () => {
   const { isLoading, isError, data, error } = useEvents();
 
-  const { locale } = useContext(AppContext);
+  const { locale, hideAntuValidationSteps, hideIgnoredExportNetexBlocks, navigate } = useContext(AppContext);
 
   if (isLoading) {
     return <Loader>Loading events...</Loader>;
@@ -20,13 +20,13 @@ export const ConnectedEventDetails = () => {
   return (
     <>
       <EventDetails
-        navigate={() => {}} // todo: implement
+        navigate={navigate}
         locale={locale}
         dataSource={data}
         showDateFilter
         showNewDeliveriesFilter
-        hideIgnoredExportNetexBlocks={false}
-        hideAntuValidationSteps={false}
+        hideIgnoredExportNetexBlocks={hideIgnoredExportNetexBlocks}
+        hideAntuValidationSteps={hideAntuValidationSteps}
       />
     </>
   );

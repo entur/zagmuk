@@ -49,6 +49,9 @@ const AuthedApp = () => {
         env={process.env.REACT_APP_ENV || "dev"}
         getToken={auth.getAccessTokenSilently}
         providerId={providerId}
+        hideAntuValidationSteps={false}
+        hideIgnoredExportNetexBlocks={false}
+        navigate={(url) => window.location.href = url}
       />
     </>
   );
