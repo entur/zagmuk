@@ -7,7 +7,12 @@ import { useEvents } from "./useEvents";
 export const ConnectedEventDetails = () => {
   const { isLoading, isError, data, error } = useEvents();
 
-  const { locale, hideAntuValidationSteps, hideIgnoredExportNetexBlocks, navigate } = useContext(AppContext);
+  const {
+    locale,
+    hideAntuValidationSteps,
+    hideIgnoredExportNetexBlocks,
+    navigate,
+  } = useContext(AppContext);
 
   if (isLoading) {
     return <Loader>Loading events...</Loader>;

@@ -51,7 +51,7 @@ const AuthedApp = () => {
         providerId={providerId}
         hideAntuValidationSteps={false}
         hideIgnoredExportNetexBlocks={false}
-        navigate={(url) => window.location.href = url}
+        navigate={(url) => (window.location.href = url)}
       />
     </>
   );

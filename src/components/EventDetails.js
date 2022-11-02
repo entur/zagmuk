@@ -99,7 +99,7 @@ class EventDetails extends React.Component {
     const paginationMap = getPaginationMap(filteredSource);
 
     const filters = (
-      <div style={{ display: "flex", flexDirection: "column"  }}>
+      <div style={{ display: "flex", flexDirection: "column" }}>
         <FilterButtonTray
           label="Status"
           locale={locale}

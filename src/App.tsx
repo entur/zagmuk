@@ -20,7 +20,7 @@ export interface AppProps extends DefaultPayload {
 export const AppContext = React.createContext<AppProps>({
   hideIgnoredExportNetexBlocks: true,
   hideAntuValidationSteps: false,
-  navigate: () => {}
+  navigate: () => {},
 });
 
 export function App(props: AppProps) {
@@ -46,9 +46,9 @@ export function App(props: AppProps) {
             <QueryClientProvider client={queryClient}>
               <div className="zagmuk-app">
                 <div className="zagmuk-app-content card">
-                <div style={{ marginLeft: "1rem" }}>
-                  <UploadAndValidation />
-                </div>
+                  <div style={{ marginLeft: "1rem" }}>
+                    <UploadAndValidation />
+                  </div>
                   <ConnectedEventDetails />
                 </div>
               </div>
