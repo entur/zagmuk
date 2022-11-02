@@ -1,0 +1,6 @@
+{
+  "env": "test",
+  "chouetteBaseUrl": "https://rutedb.staging.entur.org/",
+  "timetableEventsApiUrl": "https://api.staging.entur.io/timetable-admin/v1/events/timetable",
+  "timetableAdminApiUrl": "https://api.staging.entur.io/timetable-admin/v1/timetable"
+}
