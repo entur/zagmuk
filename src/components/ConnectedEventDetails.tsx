@@ -23,8 +23,6 @@ export const ConnectedEventDetails = () => {
         navigate={navigate}
         locale={locale}
         dataSource={data}
-        showDateFilter
-        showNewDeliveriesFilter
         hideIgnoredExportNetexBlocks={hideIgnoredExportNetexBlocks}
         hideAntuValidationSteps={hideAntuValidationSteps}
       />

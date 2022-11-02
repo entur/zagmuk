@@ -14,7 +14,7 @@ class EventDetails extends React.Component {
     this.state = {
       activePageIndex: 1,
       endStateFilter: "ALL",
-      dateFilter: props.showDateFilter ? "LAST_12_HOURS" : "ALL_TIME",
+      dateFilter: "LAST_WEEK",
       onlyNewDeliveryFilter: false,
     };
   }
@@ -78,7 +78,6 @@ class EventDetails extends React.Component {
       locale,
       includeLevel2,
       showDateFilter,
-      showNewDeliveriesFilter,
       hideIgnoredExportNetexBlocks = true,
       hideAntuValidationSteps = true,
       navigate,
@@ -141,20 +140,18 @@ class EventDetails extends React.Component {
           />
         )}
 
-        {showNewDeliveriesFilter && (
-          <div style={{ marginLeft: "1rem" }}>
-            <Label>{translations[locale].filter_direct_delivery}</Label>
-            <Switch
-              checked={onlyNewDeliveryFilter}
-              onChange={(e) => {
-                this.setState({
-                  onlyNewDeliveryFilter: e.target.checked,
-                  activePageIndex: 1,
-                });
-              }}
-            />
-          </div>
-        )}
+        <div style={{ marginLeft: "1rem" }}>
+          <Label>{translations[locale].filter_direct_delivery}</Label>
+          <Switch
+            checked={onlyNewDeliveryFilter}
+            onChange={(e) => {
+              this.setState({
+                onlyNewDeliveryFilter: e.target.checked,
+                activePageIndex: 1,
+              });
+            }}
+          />
+        </div>
       </div>
     );
 
