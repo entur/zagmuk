@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "ent-zagmuk-dev"
+    "dev": "ent-zagmuk-dev",
+    "test": "ent-zagmuk-tst",
+    "prod": "ent-zagmuk-prd"
   }
 }
