@@ -50,6 +50,7 @@ const ControlledLink = ({ events, includeLevel2, navigate, children }) => {
           id={endState.chouetteJobId}
           referential={endState.referential}
           navigate={navigate}
+          state={endState.state}
         >
           {children}
         </UdugLink>
