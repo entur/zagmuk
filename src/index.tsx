@@ -1,5 +1,5 @@
 import React from "react";
-import { render, unmountComponentAtNode } from "react-dom";
+import ReactDOM, { createRoot } from "react-dom/client";
 import { AppShellStandalone } from "./AppShellStandalone";
 import reportWebVitals from "./reportWebVitals";
 
@@ -10,22 +10,24 @@ import { App, AppProps } from "./App";
 registerMicroFrontend<AppProps>({
   microFrontendId: "ror-zagmuk",
   mount: (mountPoint, payload) => {
-    render(<App {...payload} />, mountPoint);
+    const root = createRoot(mountPoint as Element);
+    root.render(<App {...payload} />);
   },
   unmount: (mountPoint) => {
-    unmountComponentAtNode(mountPoint);
+    const root = createRoot(mountPoint as Element);
+    root.unmount();
   },
 });
 
 if (process.env.REACT_APP_STANDALONE) {
-  render(
+  const root = ReactDOM.createRoot(document.getElementById("root") as Element);
+  root.render(
     <AppShellStandalone
       domain={process.env.REACT_APP_AUTH0_DOMAIN || ""}
       clientId={process.env.REACT_APP_AUTH0_CLIENT_ID || ""}
       audience={process.env.REACT_APP_AUTH0_AUDIENCE || ""}
       redirectUri={`${window.location.origin}${process.env.REACT_APP_AUTH0_RELATIVE_CALLBACK_URL}`}
-    />,
-    document.getElementById("root")
+    />
   );
 }
 
