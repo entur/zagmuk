@@ -1,4 +1,3 @@
-import { Link } from "@entur/typography";
 import React from "react";
 import { useConfig } from "../config/config";
 
@@ -7,10 +6,15 @@ const UdugLink = ({ id, referential, navigate, children }) => {
   const baseURL = `${udugBaseUrl}report/`;
   const URL = `${baseURL}${referential}/${id}`;
 
+  const onClick = (e) => {
+    e.preventDefault();
+    navigate(URL);
+  };
+
   return (
-    <Link title={URL} onClick={() => navigate(URL)}>
+    <a title={URL} href={URL} onClick={onClick}>
       {children}
-    </Link>
+    </a>
   );
 };
 
