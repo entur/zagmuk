@@ -39,7 +39,7 @@ export function App(props: AppProps) {
   });
 
   return (
-    <>
+    <React.StrictMode>
       {!loading && (
         <ConfigContext.Provider value={config}>
           <AppContext.Provider value={props}>
@@ -57,6 +57,6 @@ export function App(props: AppProps) {
           </AppContext.Provider>
         </ConfigContext.Provider>
       )}
-    </>
+    </React.StrictMode>
   );
 }
