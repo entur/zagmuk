@@ -77,7 +77,6 @@ class EventDetails extends React.Component {
       dataSource,
       locale,
       includeLevel2,
-      showDateFilter,
       hideIgnoredExportNetexBlocks = true,
       hideAntuValidationSteps = true,
       navigate,
@@ -129,16 +128,14 @@ class EventDetails extends React.Component {
           translationKey="states"
         />
 
-        {showDateFilter && (
-          <FilterButtonTray
-            label="Uploaded"
-            locale={locale}
-            activeButtonId={this.state.dateFilter}
-            onChange={this.handleFilterChange.bind(this)}
-            buttonConfig={buttonConfig}
-            translationKey="filterButton"
-          />
-        )}
+        <FilterButtonTray
+          label="Uploaded"
+          locale={locale}
+          activeButtonId={this.state.dateFilter}
+          onChange={this.handleFilterChange.bind(this)}
+          buttonConfig={buttonConfig}
+          translationKey="filterButton"
+        />
 
         <div style={{ marginLeft: "1rem" }}>
           <Label>{translations[locale].filter_direct_delivery}</Label>
