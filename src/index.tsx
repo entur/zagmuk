@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM, { createRoot } from "react-dom/client";
 import { AppShellStandalone } from "./AppShellStandalone";
-import reportWebVitals from "./reportWebVitals";
+//import reportWebVitals from "./reportWebVitals";
 
 import "./index.css";
 import { registerMicroFrontend } from "@entur/micro-frontend";
