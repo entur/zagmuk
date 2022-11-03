@@ -7,7 +7,6 @@ import "./index.css";
 import { registerMicroFrontend } from "@entur/micro-frontend";
 import { App, AppProps } from "./App";
 
-
 registerMicroFrontend<AppProps>({
   microFrontendId: "ror-zagmuk",
   mount: (mountPoint, payload) => {
