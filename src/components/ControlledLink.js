@@ -31,7 +31,12 @@ const ControlledLink = ({ events, includeLevel2, navigate, children }) => {
     // chouetteJobId can refer to an external ID from either chouette or antu
     const externalId = endState.chouetteJobId;
 
-    if (supportedChouetteActions.indexOf(endState.action) > -1 && externalId) {
+    if (
+      supportedChouetteActions.indexOf(endState.action) > -1 &&
+      externalId &&
+      endState.state !== "STARTED" &&
+      endState.state !== "PENDING"
+    ) {
       return (
         <ChouetteLink
           action={chouetteMap[endState.action]}
@@ -43,14 +48,15 @@ const ControlledLink = ({ events, includeLevel2, navigate, children }) => {
       );
     } else if (
       supportedUdugActions.indexOf(endState.action) > -1 &&
-      externalId
+      externalId &&
+      endState.state !== "STARTED" &&
+      endState.state !== "PENDING"
     ) {
       return (
         <UdugLink
           id={endState.chouetteJobId}
           referential={endState.referential}
           navigate={navigate}
-          state={endState.state}
         >
           {children}
         </UdugLink>

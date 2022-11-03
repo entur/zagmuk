@@ -11,10 +11,6 @@ const UdugLink = ({ id, referential, navigate, children, state }) => {
     navigate(URL);
   };
 
-  if (state === "STARTED" || state === "PENDING") {
-    return children;
-  }
-
   return (
     <a title={URL} href={URL} onClick={onClick}>
       {children}
