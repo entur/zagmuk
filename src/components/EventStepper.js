@@ -19,6 +19,7 @@ const NETEX_BLOCKS_EVENTS = [
 const ANTU_VALIDATION_EVENTS = [
   "PREVALIDATION",
   "EXPORT_NETEX_POSTVALIDATION",
+  "EXPORT_NETEX_MERGED_POSTVALIDATION",
   "EXPORT_NETEX_BLOCKS_POSTVALIDATION",
 ];
 
@@ -47,6 +48,7 @@ class EventStepper extends React.Component {
       "VALIDATION_LEVEL_2",
       "EXPORT_NETEX",
       "EXPORT_NETEX_POSTVALIDATION",
+      "EXPORT_NETEX_MERGED_POSTVALIDATION",
       "EXPORT_NETEX_BLOCKS",
       "EXPORT",
       "BUILD_GRAPH",
@@ -164,6 +166,10 @@ class EventStepper extends React.Component {
               return false;
             }
 
+            if (ANTU_VALIDATION_EVENTS.includes(key)) {
+              return event[key].endState !== "IGNORED";
+            }
+
             return true;
           })
           .map((key, i) => {
@@ -188,6 +194,13 @@ class EventStepper extends React.Component {
         }
 
         if (hideAntuValidationSteps && ANTU_VALIDATION_EVENTS.includes(group)) {
+          return null;
+        }
+
+        if (
+          ANTU_VALIDATION_EVENTS.includes(group) &&
+          event.endState === "IGNORED"
+        ) {
           return null;
         }
 
