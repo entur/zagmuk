@@ -187,6 +187,8 @@ class EventDetails extends React.Component {
                     marginBottom: 20,
                     border: "1px solid #eee",
                     padding: 10,
+                    overflowY: "scroll",
+                    height: "100%",
                   }}
                 >
                   <EventStepper
