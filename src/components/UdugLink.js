@@ -8,6 +8,7 @@ const UdugLink = ({ id, referential, navigate, children, state }) => {
 
   const onClick = (e) => {
     e.preventDefault();
+    e.stopPropagation();
     navigate(URL);
   };
 
