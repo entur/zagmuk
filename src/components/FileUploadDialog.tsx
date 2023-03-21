@@ -35,10 +35,11 @@ const formatFileSize = (size: number) => {
 interface Props {
   isModalOpen: boolean;
   setModalOpen: (open: boolean) => void;
+  isFlexDataset: boolean;
 }
 
-export const FileUploadDialog = ({ isModalOpen, setModalOpen }: Props) => {
-  const { mutation, progress, fileUploadState } = useFileUploadMutation();
+export const FileUploadDialog = ({ isModalOpen, setModalOpen, isFlexDataset }: Props) => {
+  const { mutation, progress, fileUploadState } = useFileUploadMutation(isFlexDataset);
   const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
     accept: {
       "application/zip": [".zip", ".rar"],

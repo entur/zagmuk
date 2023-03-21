@@ -11,10 +11,11 @@ export enum FileUploadState {
   FAILED,
 }
 
-export const useFileUploadMutation = () => {
+export const useFileUploadMutation = (isFlexDataset: boolean) => {
   const { timetableAdminApiUrl } = useConfig();
   const { getToken, providerId } = useContext(AppContext);
   const url = `${timetableAdminApiUrl}/${providerId}/files`;
+  const flexUrl = `${timetableAdminApiUrl}/${providerId}/flex/files`;
 
   const [fileUploadState, setFileUploadState] = useState<FileUploadState>(
     FileUploadState.NOT_STARTED
@@ -32,7 +33,7 @@ export const useFileUploadMutation = () => {
     });
 
     try {
-      await axios.post(url, data, {
+      await axios.post(isFlexDataset ? flexUrl : url, data, {
         onUploadProgress: (progressEvent) => {
           const percentCompleted =
             (progressEvent.loaded / progressEvent.total!) * 100;

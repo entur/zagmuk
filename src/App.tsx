@@ -14,12 +14,14 @@ const queryClient = new QueryClient();
 export interface AppProps extends DefaultPayload {
   hideIgnoredExportNetexBlocks?: boolean;
   hideAntuValidationSteps?: boolean;
+  hideFlexDataImport?: boolean;
   navigate?: (url: string) => void;
 }
 
 export const AppContext = React.createContext<AppProps>({
   hideIgnoredExportNetexBlocks: true,
   hideAntuValidationSteps: false,
+  hideFlexDataImport: true,
   navigate: () => {},
 });
 
