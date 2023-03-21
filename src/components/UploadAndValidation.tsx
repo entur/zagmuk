@@ -14,6 +14,8 @@ export const UploadAndValidation = () => {
   const [confirmValidateDialogOpen, setConfirmValidateDialogOpen] =
     useState(false);
 
+  console.log('hideFlexDataImport', hideFlexDataImport);
+
   if (!providerId) {
     return null;
   }
@@ -29,7 +31,7 @@ export const UploadAndValidation = () => {
         >
           Last opp nytt datasett <UploadIcon />
         </PrimaryButton>
-        {env === "development" && !hideFlexDataImport && (
+        {env === "development" && !!hideFlexDataImport && (
           <PrimaryButton
             onClick={() => {
               setFlexDataset(true);
