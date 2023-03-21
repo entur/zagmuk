@@ -29,7 +29,7 @@ export const UploadAndValidation = () => {
         >
           Last opp nytt datasett <UploadIcon />
         </PrimaryButton>
-        {env === "development" && !hideFlexDataImport && (
+        {env === "development" && !!hideFlexDataImport && (
           <PrimaryButton
             onClick={() => {
               setFlexDataset(true);
