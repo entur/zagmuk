@@ -14,8 +14,6 @@ export const UploadAndValidation = () => {
   const [confirmValidateDialogOpen, setConfirmValidateDialogOpen] =
     useState(false);
 
-  console.log('hideFlexDataImport', hideFlexDataImport);
-
   if (!providerId) {
     return null;
   }
