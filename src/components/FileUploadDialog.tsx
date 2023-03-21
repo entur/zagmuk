@@ -38,8 +38,13 @@ interface Props {
   isFlexDataset: boolean;
 }
 
-export const FileUploadDialog = ({ isModalOpen, setModalOpen, isFlexDataset }: Props) => {
-  const { mutation, progress, fileUploadState } = useFileUploadMutation(isFlexDataset);
+export const FileUploadDialog = ({
+  isModalOpen,
+  setModalOpen,
+  isFlexDataset,
+}: Props) => {
+  const { mutation, progress, fileUploadState } =
+    useFileUploadMutation(isFlexDataset);
   const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
     accept: {
       "application/zip": [".zip", ".rar"],
