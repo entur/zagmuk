@@ -21,20 +21,24 @@ export const UploadAndValidation = () => {
   return (
     <div style={{ display: "flex", justifyContent: "space-between" }}>
       <ButtonGroup>
-        <PrimaryButton onClick={() => {
-          setFlexDataset(false);
-          setFileUploadDialogOpen(true);
-        }}>
+        <PrimaryButton
+          onClick={() => {
+            setFlexDataset(false);
+            setFileUploadDialogOpen(true);
+          }}
+        >
           Last opp nytt datasett <UploadIcon />
         </PrimaryButton>
-        {env === 'development' && !hideFlexDataImport &&
-         <PrimaryButton onClick={() => {
-           setFlexDataset(true);
-           setFileUploadDialogOpen(true);
-         }}>
-           Last opp nytt flex datasett <UploadIcon />
-         </PrimaryButton>
-        }
+        {env === "development" && !hideFlexDataImport && (
+          <PrimaryButton
+            onClick={() => {
+              setFlexDataset(true);
+              setFileUploadDialogOpen(true);
+            }}
+          >
+            Last opp nytt flex datasett <UploadIcon />
+          </PrimaryButton>
+        )}
         <SecondaryButton onClick={() => setConfirmValidateDialogOpen(true)}>
           Valider datasett
         </SecondaryButton>
