@@ -8,7 +8,7 @@ import { useConfig } from "../config/config";
 
 export const UploadAndValidation = () => {
   const { env } = useConfig();
-  const { providerId, hideFlexDataImport } = useContext(AppContext);
+  const { providerId, hideFlexDataImport = true } = useContext(AppContext);
   const [fileUploadDialogOpen, setFileUploadDialogOpen] = useState(false);
   const [flexDataset, setFlexDataset] = useState(false);
   const [confirmValidateDialogOpen, setConfirmValidateDialogOpen] =
@@ -29,7 +29,7 @@ export const UploadAndValidation = () => {
         >
           Last opp nytt datasett <UploadIcon />
         </PrimaryButton>
-        {env === "development" && !!hideFlexDataImport && (
+        {env === "development" && !hideFlexDataImport && (
           <PrimaryButton
             onClick={() => {
               setFlexDataset(true);
