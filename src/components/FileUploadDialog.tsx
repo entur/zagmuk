@@ -60,7 +60,9 @@ export const FileUploadDialog = ({
     <Modal
       open={isModalOpen}
       onDismiss={() => setModalOpen(false)}
-      title="Last opp nytt datasett"
+      title={
+        isFlexDataset ? "Last opp nytt flex datasett" : "Last opp nytt datasett"
+      }
       size="medium"
     >
       <div {...getRootProps({ className: "dropzone" })}>
