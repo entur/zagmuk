@@ -20,7 +20,6 @@ import {
   ButtonGroup,
   PrimaryButton,
   SecondaryButton,
-  TertiaryButton,
 } from "@entur/button";
 import { Paragraph } from "@entur/typography";
 
