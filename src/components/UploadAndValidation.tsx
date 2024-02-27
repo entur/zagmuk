@@ -4,12 +4,15 @@ import { useContext, useState } from "react";
 import { AppContext } from "../App";
 import { FileUploadDialog } from "./FileUploadDialog";
 import { ConfirmValidateDialog } from "./ConfirmValidateDialog";
+import { ConfirmFlexUploadDialog } from "./ConfirmFlexUploadDialog";
 
 export const UploadAndValidation = () => {
   const { providerId, hideFlexDataImport = true } = useContext(AppContext);
   const [fileUploadDialogOpen, setFileUploadDialogOpen] = useState(false);
   const [flexDataset, setFlexDataset] = useState(false);
   const [confirmValidateDialogOpen, setConfirmValidateDialogOpen] =
+    useState(false);
+  const [confirmFlexUploadDialogOpen, setConfirmFlexUploadDialogOpen] =
     useState(false);
 
   if (!providerId) {
@@ -35,14 +38,8 @@ export const UploadAndValidation = () => {
         </ButtonGroup>
         <ButtonGroup>
           {!hideFlexDataImport && (
-            <PrimaryButton
-              style={{ backgroundColor: "rgb(69, 118, 69)" }}
-              onClick={() => {
-                setFlexDataset(true);
-                setFileUploadDialogOpen(true);
-              }}
-            >
-              Last opp nytt flex datasett <UploadIcon />
+            <PrimaryButton onClick={() => setConfirmFlexUploadDialogOpen(true)}>
+              Fleksibel transport: last opp nytt datasett <UploadIcon />
             </PrimaryButton>
           )}
         </ButtonGroup>
@@ -55,6 +52,18 @@ export const UploadAndValidation = () => {
       <ConfirmValidateDialog
         open={confirmValidateDialogOpen}
         handleClose={() => setConfirmValidateDialogOpen(false)}
+      />
+      <ConfirmFlexUploadDialog
+        open={confirmFlexUploadDialogOpen}
+        handleClose={() => setConfirmFlexUploadDialogOpen(false)}
+        handleFlex={() => {
+          setFlexDataset(true);
+          setFileUploadDialogOpen(true);
+        }}
+        handleNonFlex={() => {
+          setFlexDataset(false);
+          setFileUploadDialogOpen(true);
+        }}
       />
     </>
   );
