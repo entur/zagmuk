@@ -16,11 +16,7 @@
 
 import { useCallback } from "react";
 import { Modal } from "@entur/modal";
-import {
-  ButtonGroup,
-  PrimaryButton,
-  SecondaryButton,
-} from "@entur/button";
+import { ButtonGroup, PrimaryButton, SecondaryButton } from "@entur/button";
 import { Paragraph } from "@entur/typography";
 
 export const ConfirmFlexUploadDialog = ({
