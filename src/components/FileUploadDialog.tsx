@@ -17,6 +17,7 @@
 import { useDropzone } from "react-dropzone";
 import { Modal } from "@entur/modal";
 import { PrimaryButton } from "@entur/button";
+import { Radio, RadioGroup } from "@entur/form";
 import { CheckIcon, ValidationErrorIcon } from "@entur/icons";
 import { Loader } from "@entur/loader";
 import "./fileUpload.css";
@@ -24,6 +25,7 @@ import {
   FileUploadState,
   useFileUploadMutation,
 } from "./useFileUploadMutation";
+import React, {useState} from "react";
 
 const formatFileSize = (size: number) => {
   if (size > 1024) {
@@ -35,16 +37,14 @@ const formatFileSize = (size: number) => {
 interface Props {
   isModalOpen: boolean;
   setModalOpen: (open: boolean) => void;
-  isFlexDataset: boolean;
 }
 
 export const FileUploadDialog = ({
   isModalOpen,
   setModalOpen,
-  isFlexDataset,
 }: Props) => {
-  const { mutation, progress, fileUploadState } =
-    useFileUploadMutation(isFlexDataset);
+  const { mutation, progress, fileUploadState, setIsFlexDataset } =
+    useFileUploadMutation();
   const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
     accept: {
       "application/zip": [".zip", ".rar"],
@@ -56,13 +56,13 @@ export const FileUploadDialog = ({
     ? acceptedFiles.map((file) => file.size / 1024).reduce((f1, f2) => f1 + f2)
     : 0;
 
+  const [lineType, setLineType] = useState("");
+
   return (
     <Modal
       open={isModalOpen}
       onDismiss={() => setModalOpen(false)}
-      title={
-        isFlexDataset ? "Last opp nytt flex datasett" : "Last opp nytt datasett"
-      }
+      title="Last opp nytt datasett"
       size="medium"
     >
       <div {...getRootProps({ className: "dropzone" })}>
@@ -133,6 +133,17 @@ export const FileUploadDialog = ({
           <Loader progress={progress} />
         ) : null}
       </div>
+      <div>
+        <RadioGroup
+          name="line-type"
+          label="Velg Linje type"
+          onChange={e => setLineType(e.target.value)}
+          value={lineType}
+        >
+          <Radio value="flexibleLine">FlexibleLine</Radio>
+          <Radio value="line">Line</Radio>
+        </RadioGroup>
+      </div>
       <div
         style={{
           padding: 10,
@@ -151,8 +162,9 @@ export const FileUploadDialog = ({
         </div>
         <PrimaryButton
           style={{ marginRight: 10 }}
-          disabled={!acceptedFiles.length}
+          disabled={!acceptedFiles.length || !lineType}
           onClick={() => {
+            setIsFlexDataset(lineType === "flexibleLine");
             mutation.mutate(acceptedFiles);
           }}
         >

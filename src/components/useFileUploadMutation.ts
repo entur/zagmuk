@@ -11,7 +11,7 @@ export enum FileUploadState {
   FAILED,
 }
 
-export const useFileUploadMutation = (isFlexDataset: boolean) => {
+export const useFileUploadMutation = () => {
   const { timetableAdminApiUrl } = useConfig();
   const { getToken, providerId } = useContext(AppContext);
   const url = `${timetableAdminApiUrl}/${providerId}/files`;
@@ -21,6 +21,8 @@ export const useFileUploadMutation = (isFlexDataset: boolean) => {
     FileUploadState.NOT_STARTED
   );
   const [progress, setProgress] = useState(0);
+
+  const [isFlexDataset, setIsFlexDataset] = useState(false);
 
   const mutation = useMutation(async (files: File[]) => {
     setFileUploadState(FileUploadState.STARTED);
@@ -52,6 +54,7 @@ export const useFileUploadMutation = (isFlexDataset: boolean) => {
 
   return {
     mutation,
+    setIsFlexDataset,
     progress,
     fileUploadState,
   };
