@@ -51,7 +51,6 @@ class EventStepper extends React.Component {
       "EXPORT_NETEX_MERGED_POSTVALIDATION",
       "EXPORT_NETEX_BLOCKS",
       "EXPORT",
-      "BUILD_GRAPH",
       "OTP2_BUILD_GRAPH",
       "EXPORT_NETEX_BLOCKS_POSTVALIDATION",
     ];
@@ -146,82 +145,87 @@ class EventStepper extends React.Component {
         Array.isArray(column) && column.length > 2 ? 40 * column.length : 45,
     });
 
-    return Object.keys(formattedGroups).map((group, index) => {
-      let column;
-      let event = formattedGroups[group];
+    return Object.keys(formattedGroups)
+      .filter((key) => key !== "BUILD_GRAPH")
+      .map((group, index) => {
+        let column;
+        let event = formattedGroups[group];
 
-      if (Array.isArray(event)) {
-        column = Object.keys(event)
-          .filter((key) => {
-            if (
-              hideIgnoredExportNetexBlocks &&
-              NETEX_BLOCKS_EVENTS.includes(key)
-            ) {
-              return event[key].endState !== "IGNORED";
-            }
+        if (Array.isArray(event)) {
+          column = Object.keys(event)
+            .filter((key) => {
+              if (
+                hideIgnoredExportNetexBlocks &&
+                NETEX_BLOCKS_EVENTS.includes(key)
+              ) {
+                return event[key].endState !== "IGNORED";
+              }
 
-            if (
-              hideAntuValidationSteps &&
-              ANTU_VALIDATION_EVENTS.includes(key)
-            ) {
-              return false;
-            }
+              if (
+                hideAntuValidationSteps &&
+                ANTU_VALIDATION_EVENTS.includes(key)
+              ) {
+                return false;
+              }
 
-            if (ANTU_VALIDATION_EVENTS.includes(key)) {
-              return event[key].endState !== "IGNORED";
-            }
+              if (ANTU_VALIDATION_EVENTS.includes(key)) {
+                return event[key].endState !== "IGNORED";
+              }
 
-            return true;
-          })
-          .map((key, i) => {
-            return this.renderEvent(
-              event[key],
-              event,
-              key,
-              i,
-              false,
-              i,
-              locale,
-              includeLevel2
-            );
-          });
-      } else {
-        if (
-          hideIgnoredExportNetexBlocks &&
-          NETEX_BLOCKS_EVENTS.includes(group) &&
-          event.endState === "IGNORED"
-        ) {
-          return null;
+              return true;
+            })
+            .map((key, i) => {
+              return this.renderEvent(
+                event[key],
+                event,
+                key,
+                i,
+                false,
+                i,
+                locale,
+                includeLevel2
+              );
+            });
+        } else {
+          if (
+            hideIgnoredExportNetexBlocks &&
+            NETEX_BLOCKS_EVENTS.includes(group) &&
+            event.endState === "IGNORED"
+          ) {
+            return null;
+          }
+
+          if (
+            hideAntuValidationSteps &&
+            ANTU_VALIDATION_EVENTS.includes(group)
+          ) {
+            return null;
+          }
+
+          if (
+            ANTU_VALIDATION_EVENTS.includes(group) &&
+            event.endState === "IGNORED"
+          ) {
+            return null;
+          }
+
+          column = this.renderEvent(
+            event,
+            groups,
+            group,
+            index,
+            index === 0,
+            0,
+            locale,
+            includeLevel2
+          );
         }
-
-        if (hideAntuValidationSteps && ANTU_VALIDATION_EVENTS.includes(group)) {
-          return null;
-        }
-
-        if (
-          ANTU_VALIDATION_EVENTS.includes(group) &&
-          event.endState === "IGNORED"
-        ) {
-          return null;
-        }
-
-        column = this.renderEvent(
-          event,
-          groups,
-          group,
-          index,
-          index === 0,
-          0,
-          locale,
-          includeLevel2
+        return (
+          <div key={"bullet-" + index} style={columnStyle(column)}>
+            {column}
+          </div>
         );
-      }
-      return (
-        <div key={"bullet-" + index} style={columnStyle(column)}>
-          {column}
-        </div>
-      );
-    });
+      });
   }
 
   renderEvent(
@@ -324,8 +328,8 @@ class EventStepper extends React.Component {
 
     this.createCombinedSplit(
       formattedGroups,
-      ["EXPORT_NETEX_BLOCKS", "EXPORT", "BUILD_GRAPH", "OTP2_BUILD_GRAPH"],
-      "BUILD_GRAPH"
+      ["EXPORT_NETEX_BLOCKS", "EXPORT", "OTP2_BUILD_GRAPH"],
+      "OTP2_BUILD_GRAPH"
     );
 
     const bullets = this.bullet(
