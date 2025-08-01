@@ -33,7 +33,7 @@ jobs:
       - run: npm run check
       - run: npm run test -- --coverage
       - name: SonarQube Scan
-        if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
+        if: '${{ github.event.pull_request.head.repo.full_name == github.repository && github.actor != ''dependabot[bot]'' }}'
         uses: sonarsource/sonarqube-scan-action@master
         env:
           SONAR_TOKEN: ${{ secrets.ENTUR_SONAR_PASSWORD }}
@@ -50,7 +50,7 @@ jobs:
         env:
           REACT_APP_VERSION: ${{ github.sha }}
       - name: Archive production artifacts
-        if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
+        if: '${{ github.event.pull_request.head.repo.full_name == github.repository && github.actor != ''dependabot[bot]'' }}'
         uses: actions/upload-artifact@v4
         with:
           name: build
@@ -58,7 +58,7 @@ jobs:
             build
       - name: Deploy preview
         uses: FirebaseExtended/action-hosting-deploy@v0
-        if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
+        if: '${{ github.event.pull_request.head.repo.full_name == github.repository && github.actor != ''dependabot[bot]'' }}'
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_ENT_ZAGMUK_DEV }}'
