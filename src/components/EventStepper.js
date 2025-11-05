@@ -214,7 +214,7 @@ class EventStepper extends React.Component {
             index,
             index === 0,
             0,
-            locale,
+            locale
           );
         }
         return (
@@ -225,15 +225,7 @@ class EventStepper extends React.Component {
       });
   }
 
-  renderEvent(
-    event,
-    groups,
-    group,
-    index,
-    isFirst,
-    columnIndex = 0,
-    locale,
-  ) {
+  renderEvent(event, groups, group, index, isFirst, columnIndex = 0, locale) {
     const groupStyle = {
       display: "flex",
       flexDirection: "row",
@@ -287,10 +279,7 @@ class EventStepper extends React.Component {
             opacity: event.missingBeforeStartStart ? 0.2 : 1,
           }}
         >
-          <ControlledLink
-            events={event}
-            navigate={this.props.navigate}
-          >
+          <ControlledLink events={event} navigate={this.props.navigate}>
             {ActionTranslations[locale].text[group]}
           </ControlledLink>
         </div>
