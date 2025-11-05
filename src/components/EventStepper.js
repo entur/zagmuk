@@ -132,7 +132,6 @@ class EventStepper extends React.Component {
     formattedGroups,
     groups,
     locale,
-    includeLevel2,
     hideIgnoredExportNetexBlocks,
     hideAntuValidationSteps
   ) {
@@ -182,8 +181,7 @@ class EventStepper extends React.Component {
                 i,
                 false,
                 i,
-                locale,
-                includeLevel2
+                locale
               );
             });
         } else {
@@ -217,7 +215,6 @@ class EventStepper extends React.Component {
             index === 0,
             0,
             locale,
-            includeLevel2
           );
         }
         return (
@@ -236,7 +233,6 @@ class EventStepper extends React.Component {
     isFirst,
     columnIndex = 0,
     locale,
-    includeLevel2
   ) {
     const groupStyle = {
       display: "flex",
@@ -292,7 +288,6 @@ class EventStepper extends React.Component {
           }}
         >
           <ControlledLink
-            includeLevel2={includeLevel2}
             events={event}
             navigate={this.props.navigate}
           >
@@ -317,7 +312,6 @@ class EventStepper extends React.Component {
       groups,
       listItem,
       locale,
-      includeLevel2,
       hideIgnoredExportNetexBlocks,
       hideAntuValidationSteps,
     } = this.props;
@@ -336,7 +330,6 @@ class EventStepper extends React.Component {
       formattedGroups,
       groups,
       locale,
-      includeLevel2,
       hideIgnoredExportNetexBlocks,
       hideAntuValidationSteps
     );

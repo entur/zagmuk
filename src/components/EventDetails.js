@@ -76,7 +76,6 @@ class EventDetails extends React.Component {
     const {
       dataSource,
       locale,
-      includeLevel2,
       hideIgnoredExportNetexBlocks = true,
       hideAntuValidationSteps = true,
       navigate,
@@ -192,7 +191,6 @@ class EventDetails extends React.Component {
                   }}
                 >
                   <EventStepper
-                    includeLevel2={includeLevel2}
                     locale={locale}
                     key={"event-group-" + listItem.chouetteJobId + "-" + index}
                     groups={eventGroup}
