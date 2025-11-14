@@ -303,6 +303,8 @@ class EventStepper extends React.Component {
       locale,
       hideIgnoredExportNetexBlocks,
       hideAntuValidationSteps,
+      providers,
+      providerName,
     } = this.props;
     const { expanded } = this.state;
 
@@ -323,6 +325,12 @@ class EventStepper extends React.Component {
       hideAntuValidationSteps
     );
 
+    // Determine the provider name to display
+    const displayProviderName =
+      providerName || // Single provider view from Ninkasi
+      (providers && listItem.referential && providers[listItem.referential]) || // All providers view from Ninkasi
+      (listItem.provider && listItem.provider.name); // Fallback to API data
+
     return (
       <div
         key={"event" + listItem.chouetteJobId}
@@ -342,9 +350,9 @@ class EventStepper extends React.Component {
           >
             {formatDistanceToNow(new Date(listItem.firstEvent), { locale: nb })}
           </div>
-          {listItem.provider && listItem.provider.name && (
+          {displayProviderName && (
             <div style={{ fontSize: "0.8em", fontWeight: 600, flex: 1 }}>
-              {listItem.provider.name}
+              {displayProviderName}
             </div>
           )}
           <div style={{ fontSize: "0.9em", fontWeight: 600, flex: 2 }}>
