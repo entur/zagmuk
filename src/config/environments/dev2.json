@@ -1,6 +1,0 @@
-{
-  "env": "development",
-  "chouetteBaseUrl": "http://localhost:3001/",
-  "timetableEventsApiUrl": "http://localhost:10001/services/events/timetable",
-  "timetableAdminApiUrl": "http://localhost:28080/services/timetable_admin"
-}
