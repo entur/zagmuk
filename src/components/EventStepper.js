@@ -303,6 +303,8 @@ class EventStepper extends React.Component {
       locale,
       hideIgnoredExportNetexBlocks,
       hideAntuValidationSteps,
+      providers,
+      providerId,
     } = this.props;
     const { expanded } = this.state;
 
@@ -323,6 +325,16 @@ class EventStepper extends React.Component {
       hideAntuValidationSteps
     );
 
+    // Determine if we should show provider name (only in all providers view)
+    const showProviderName = providers && !providerId;
+    // Get provider ID from listItem
+    const itemProviderId =
+      listItem.providerId || (listItem.provider && listItem.provider.id);
+    const providerName =
+      showProviderName && itemProviderId && providers[itemProviderId]
+        ? providers[itemProviderId]
+        : null;
+
     return (
       <div
         key={"event" + listItem.chouetteJobId}
@@ -331,22 +343,31 @@ class EventStepper extends React.Component {
       >
         <div style={{ display: "flex", marginLeft: -15 }}>
           <div
-            title={translations[locale].duration + listItem.duration}
             style={{
-              fontSize: "0.9em",
-              fontWeight: 600,
-              color: "#e59400",
-              marginTop: -8,
+              display: "flex",
+              flexDirection: "column",
               marginRight: 20,
             }}
           >
-            {formatDistanceToNow(new Date(listItem.firstEvent), { locale: nb })}
-          </div>
-          {listItem.provider && listItem.provider.name && (
-            <div style={{ fontSize: "0.8em", fontWeight: 600, flex: 1 }}>
-              {listItem.provider.name}
+            <div
+              title={translations[locale].duration + listItem.duration}
+              style={{
+                fontSize: "0.9em",
+                fontWeight: 600,
+                color: "#e59400",
+                marginTop: -8,
+              }}
+            >
+              {formatDistanceToNow(new Date(listItem.firstEvent), {
+                locale: nb,
+              })}
             </div>
-          )}
+            {showProviderName && providerName && (
+              <div style={{ fontSize: "0.9em", fontWeight: 700, marginTop: 4 }}>
+                {providerName}
+              </div>
+            )}
+          </div>
           <div style={{ fontSize: "0.9em", fontWeight: 600, flex: 2 }}>
             {listItem.fileName || ActionTranslations[locale].filename.undefined}
           </div>
