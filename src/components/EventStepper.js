@@ -325,9 +325,8 @@ class EventStepper extends React.Component {
       hideAntuValidationSteps
     );
 
-    // Determine the provider name to display
+    // Determine the provider name to display (only for all providers view)
     const displayProviderName =
-      providerName || // Single provider view from Ninkasi
       (providers && listItem.providerId && providers[listItem.providerId]) || // All providers view from Ninkasi
       (listItem.provider && listItem.provider.name); // Fallback to API data
 
