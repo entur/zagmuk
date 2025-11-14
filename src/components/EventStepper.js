@@ -328,7 +328,7 @@ class EventStepper extends React.Component {
     // Determine the provider name to display
     const displayProviderName =
       providerName || // Single provider view from Ninkasi
-      (providers && listItem.referential && providers[listItem.referential]) || // All providers view from Ninkasi
+      (providers && listItem.providerId && providers[listItem.providerId]) || // All providers view from Ninkasi
       (listItem.provider && listItem.provider.name); // Fallback to API data
 
     return (
