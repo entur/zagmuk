@@ -79,6 +79,8 @@ class EventDetails extends React.Component {
       hideIgnoredExportNetexBlocks = true,
       hideAntuValidationSteps = true,
       navigate,
+      providers,
+      providerId,
     } = this.props;
 
     const {
@@ -198,6 +200,8 @@ class EventDetails extends React.Component {
                     hideIgnoredExportNetexBlocks={hideIgnoredExportNetexBlocks}
                     hideAntuValidationSteps={hideAntuValidationSteps}
                     navigate={navigate}
+                    providers={providers}
+                    providerId={providerId}
                   />
                 </div>
               );

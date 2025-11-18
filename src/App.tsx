@@ -16,6 +16,9 @@ export interface AppProps extends DefaultPayload {
   hideAntuValidationSteps?: boolean;
   hideFlexDataImport?: boolean;
   navigate?: (url: string) => void;
+  providers?: Record<string, string>;
+  providerId?: string;
+  providerName?: string;
 }
 
 export const AppContext = React.createContext<AppProps>({

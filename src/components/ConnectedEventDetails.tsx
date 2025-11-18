@@ -12,6 +12,8 @@ export const ConnectedEventDetails = () => {
     hideAntuValidationSteps,
     hideIgnoredExportNetexBlocks,
     navigate,
+    providers,
+    providerId,
   } = useContext(AppContext);
 
   if (isLoading) {
@@ -30,6 +32,8 @@ export const ConnectedEventDetails = () => {
         dataSource={data}
         hideIgnoredExportNetexBlocks={hideIgnoredExportNetexBlocks}
         hideAntuValidationSteps={hideAntuValidationSteps}
+        providers={providers}
+        providerId={providerId}
       />
     </>
   );
