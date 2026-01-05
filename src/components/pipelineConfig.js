@@ -88,7 +88,9 @@ export function getPipelineSteps(provider) {
   const isExperimentalImport =
     provider?.chouetteInfo?.enableExperimentalImport === true;
 
-  return isExperimentalImport ? EXPERIMENTAL_IMPORT_STEPS : STANDARD_IMPORT_STEPS;
+  return isExperimentalImport
+    ? EXPERIMENTAL_IMPORT_STEPS
+    : STANDARD_IMPORT_STEPS;
 }
 
 /**

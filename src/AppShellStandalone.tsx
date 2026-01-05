@@ -48,7 +48,9 @@ const AuthedApp = () => {
     <>
       <Dropdown
         label="Provider"
-        items={() => providers.map((p) => ({ value: String(p.id), label: p.name }))}
+        items={() =>
+          providers.map((p) => ({ value: String(p.id), label: p.name }))
+        }
         onChange={(p: any) => setProviderId(p.value)}
         value={providerId}
       />

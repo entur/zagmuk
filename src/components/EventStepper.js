@@ -299,14 +299,14 @@ class EventStepper extends React.Component {
       hideIgnoredExportNetexBlocks,
       hideAntuValidationSteps,
       providers,
+      selectedProvider,
       providerId,
     } = this.props;
     const { expanded } = this.state;
 
     // Get the provider for this import to determine which pipeline steps to use
-    const provider = this.getProviderForImport();
+    const provider = selectedProvider || this.getProviderForImport();
     const pipelineSteps = getPipelineSteps(provider);
-
 
     let formattedGroups = this.addUnlistedStates(groups, pipelineSteps);
     formattedGroups = this.aggreggateFileEvents(formattedGroups);
