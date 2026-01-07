@@ -81,6 +81,7 @@ class EventDetails extends React.Component {
       navigate,
       providers,
       providerId,
+      provider,
     } = this.props;
 
     const {
@@ -202,6 +203,7 @@ class EventDetails extends React.Component {
                     navigate={navigate}
                     providers={providers}
                     providerId={providerId}
+                    selectedProvider={provider}
                   />
                 </div>
               );

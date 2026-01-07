@@ -10,18 +10,12 @@ import format from "date-fns/format";
 import { nb } from "date-fns/locale";
 import formatDuration from "date-fns/formatDuration";
 import * as duration from "duration-fns";
-
-const NETEX_BLOCKS_EVENTS = [
-  "EXPORT_NETEX_BLOCKS",
-  "EXPORT_NETEX_BLOCKS_POSTVALIDATION",
-];
-
-const ANTU_VALIDATION_EVENTS = [
-  "PREVALIDATION",
-  "EXPORT_NETEX_POSTVALIDATION",
-  "EXPORT_NETEX_MERGED_POSTVALIDATION",
-  "EXPORT_NETEX_BLOCKS_POSTVALIDATION",
-];
+import {
+  getPipelineSteps,
+  COMBINED_EVENT_GROUPS,
+  ANTU_VALIDATION_EVENTS,
+  NETEX_BLOCKS_EVENTS,
+} from "./pipelineConfig";
 
 class EventStepper extends React.Component {
   constructor(props) {
@@ -36,34 +30,19 @@ class EventStepper extends React.Component {
     listItem: PropTypes.object.isRequired,
   };
 
-  eventStates() {
-    return [
-      "FILE_TRANSFER",
-      "FILE_CLASSIFICATION",
-      "FILE_DELIVERY",
-      "PREVALIDATION",
-      "IMPORT",
-      "VALIDATION_LEVEL_1",
-      "DATASPACE_TRANSFER",
-      "VALIDATION_LEVEL_2",
-      "EXPORT_NETEX",
-      "EXPORT_NETEX_POSTVALIDATION",
-      "EXPORT_NETEX_MERGED_POSTVALIDATION",
-      "EXPORT_NETEX_BLOCKS",
-      "EXPORT",
-      "OTP2_BUILD_GRAPH",
-      "EXPORT_NETEX_BLOCKS_POSTVALIDATION",
-    ];
+  getProviderForImport() {
+    const { providers, listItem } = this.props;
+    const itemProviderId =
+      listItem.providerId || (listItem.provider && listItem.provider.id);
+    return providers && itemProviderId ? providers[itemProviderId] : null;
   }
 
-  addUnlistedStates(groups) {
-    const states = this.eventStates();
-
+  addUnlistedStates(groups, pipelineSteps) {
     let groupsWithUnlisted = Object.assign({}, groups);
 
     let firstStateFound = false;
 
-    states.forEach((state) => {
+    pipelineSteps.forEach((state) => {
       if (!groupsWithUnlisted[state]) {
         groupsWithUnlisted[state] = {
           endState: "IGNORED",
@@ -77,7 +56,10 @@ class EventStepper extends React.Component {
     let finalGroups = {};
 
     Object.keys(groupsWithUnlisted)
-      .sort((key1, key2) => states.indexOf(key1) - states.indexOf(key2))
+      .sort(
+        (key1, key2) =>
+          pipelineSteps.indexOf(key1) - pipelineSteps.indexOf(key2)
+      )
       .forEach((key) => {
         finalGroups[key] = groupsWithUnlisted[key];
       });
@@ -133,7 +115,8 @@ class EventStepper extends React.Component {
     groups,
     locale,
     hideIgnoredExportNetexBlocks,
-    hideAntuValidationSteps
+    hideAntuValidationSteps,
+    pipelineSteps
   ) {
     const columnStyle = (column) => ({
       display: "flex",
@@ -146,12 +129,24 @@ class EventStepper extends React.Component {
 
     return Object.keys(formattedGroups)
       .filter((key) => key !== "BUILD_GRAPH")
+      .filter((key) => {
+        // Filter out events not in the pipeline steps for this provider
+        const event = formattedGroups[key];
+        if (Array.isArray(event)) {
+          // For combined groups, include if at least one sub-event is in pipelineSteps
+          return Object.keys(event).some((subKey) =>
+            pipelineSteps.includes(subKey)
+          );
+        }
+        return pipelineSteps.includes(key);
+      })
       .map((group, index) => {
         let column;
         let event = formattedGroups[group];
 
         if (Array.isArray(event)) {
           column = Object.keys(event)
+            .filter((key) => pipelineSteps.includes(key))
             .filter((key) => {
               if (
                 hideIgnoredExportNetexBlocks &&
@@ -304,25 +299,31 @@ class EventStepper extends React.Component {
       hideIgnoredExportNetexBlocks,
       hideAntuValidationSteps,
       providers,
+      selectedProvider,
       providerId,
     } = this.props;
     const { expanded } = this.state;
 
-    let formattedGroups = this.addUnlistedStates(groups);
+    // Get the provider for this import to determine which pipeline steps to use
+    const provider = selectedProvider || this.getProviderForImport();
+    const pipelineSteps = getPipelineSteps(provider);
+
+    let formattedGroups = this.addUnlistedStates(groups, pipelineSteps);
     formattedGroups = this.aggreggateFileEvents(formattedGroups);
 
-    this.createCombinedSplit(
-      formattedGroups,
-      ["EXPORT_NETEX_BLOCKS", "EXPORT", "OTP2_BUILD_GRAPH"],
-      "OTP2_BUILD_GRAPH"
-    );
+    // Apply combined event groups from configuration
+    COMBINED_EVENT_GROUPS.forEach((groupList) => {
+      const groupName = groupList[groupList.length - 1];
+      this.createCombinedSplit(formattedGroups, groupList, groupName);
+    });
 
     const bullets = this.bullet(
       formattedGroups,
       groups,
       locale,
       hideIgnoredExportNetexBlocks,
-      hideAntuValidationSteps
+      hideAntuValidationSteps,
+      pipelineSteps
     );
 
     // Determine if we should show provider name (only in all providers view)
@@ -332,7 +333,7 @@ class EventStepper extends React.Component {
       listItem.providerId || (listItem.provider && listItem.provider.id);
     const providerName =
       showProviderName && itemProviderId && providers[itemProviderId]
-        ? providers[itemProviderId]
+        ? providers[itemProviderId].name
         : null;
 
     return (

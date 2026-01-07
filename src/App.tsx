@@ -8,6 +8,7 @@ import { ConfigContext, useConfigProviderValue } from "./config/config";
 import { ConnectedEventDetails } from "./components/ConnectedEventDetails";
 import "./App.css";
 import { UploadAndValidation } from "./components/UploadAndValidation";
+import { Provider, ProviderMap } from "./types/provider";
 
 const queryClient = new QueryClient();
 
@@ -16,9 +17,10 @@ export interface AppProps extends DefaultPayload {
   hideAntuValidationSteps?: boolean;
   hideFlexDataImport?: boolean;
   navigate?: (url: string) => void;
-  providers?: Record<string, string>;
+  providers?: ProviderMap;
   providerId?: string;
   providerName?: string;
+  provider?: Provider;
 }
 
 export const AppContext = React.createContext<AppProps>({

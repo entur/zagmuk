@@ -13,6 +13,7 @@ export const ConnectedEventDetails = () => {
     hideIgnoredExportNetexBlocks,
     navigate,
     providers,
+    provider,
     providerId,
   } = useContext(AppContext);
 
@@ -33,6 +34,7 @@ export const ConnectedEventDetails = () => {
         hideIgnoredExportNetexBlocks={hideIgnoredExportNetexBlocks}
         hideAntuValidationSteps={hideAntuValidationSteps}
         providers={providers}
+        provider={provider}
         providerId={providerId}
       />
     </>
