@@ -21,6 +21,7 @@ const translations = {
       FILE_CLASSIFICATION: "Filklassifisering",
       FILE_DELIVERY: "Filleveranse",
       PREVALIDATION: "Prevalidering",
+      LINKING: "Lenking",
       FILTERING: "Filtrering",
       IMPORT: "Import",
       EXPORT: "GTFS-eksport",
@@ -37,6 +38,7 @@ const translations = {
     },
     title: {
       FILE_TRANSFER: "Overføring av fil fra lokal maskin til sentral server",
+      LINKING: "Berikelse av NeTEx-data med servicelinks",
       FILTERING: "Filtrering av data i den nye importprosessen",
       IMPORT: "Filvalidering og import i lokalt databaseområde nivå 1",
       EXPORT: "Eksport av rutedata ",
@@ -97,6 +99,7 @@ const translations = {
       FILE_CLASSIFICATION: "File classification",
       FILE_DELIVERY: "File delivery",
       PREVALIDATION: "Pre-validation",
+      LINKING: "Linking",
       FILTERING: "Filtering",
       IMPORT: "Import",
       EXPORT: "GTFS export",
@@ -113,6 +116,7 @@ const translations = {
     },
     title: {
       FILE_TRANSFER: "Upload local file to remote server",
+      LINKING: "Enrichment of NeTEx data with service links",
       FILTERING: "Data filtering in the new import process",
       IMPORT: "File validation and import in local data space - level 1",
       EXPORT: "Export of route data ",
