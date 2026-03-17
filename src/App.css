@@ -38,9 +38,7 @@
 }
 
 .card {
-  box-shadow:
-    #d8d8d8 0 1px 6px,
-    #d8d8d8 0 1px 4px;
+  box-shadow: #d8d8d8 0 1px 6px, #d8d8d8 0 1px 4px;
   border-radius: 2px;
   height: fit-content;
   margin: 20px 10px;

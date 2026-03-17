@@ -58,7 +58,7 @@ class EventStepper extends React.Component {
     Object.keys(groupsWithUnlisted)
       .sort(
         (key1, key2) =>
-          pipelineSteps.indexOf(key1) - pipelineSteps.indexOf(key2),
+          pipelineSteps.indexOf(key1) - pipelineSteps.indexOf(key2)
       )
       .forEach((key) => {
         finalGroups[key] = groupsWithUnlisted[key];
@@ -116,7 +116,7 @@ class EventStepper extends React.Component {
     locale,
     hideIgnoredExportNetexBlocks,
     hideAntuValidationSteps,
-    pipelineSteps,
+    pipelineSteps
   ) {
     const columnStyle = (column) => ({
       display: "flex",
@@ -135,7 +135,7 @@ class EventStepper extends React.Component {
         if (Array.isArray(event)) {
           // For combined groups, include if at least one sub-event is in pipelineSteps
           return Object.keys(event).some((subKey) =>
-            pipelineSteps.includes(subKey),
+            pipelineSteps.includes(subKey)
           );
         }
         return pipelineSteps.includes(key);
@@ -176,7 +176,7 @@ class EventStepper extends React.Component {
                 i,
                 false,
                 i,
-                locale,
+                locale
               );
             });
         } else {
@@ -209,7 +209,7 @@ class EventStepper extends React.Component {
             index,
             index === 0,
             0,
-            locale,
+            locale
           );
         }
         return (
@@ -323,7 +323,7 @@ class EventStepper extends React.Component {
       locale,
       hideIgnoredExportNetexBlocks,
       hideAntuValidationSteps,
-      pipelineSteps,
+      pipelineSteps
     );
 
     // Determine if we should show provider name (only in all providers view)
@@ -422,7 +422,7 @@ class EventStepper extends React.Component {
               </span>
               {formatDuration(
                 duration.normalize({ milliseconds: listItem.durationMillis }),
-                { locale: nb },
+                { locale: nb }
               )}
             </div>
             <div>

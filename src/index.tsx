@@ -27,7 +27,7 @@ if (process.env.REACT_APP_STANDALONE) {
       clientId={process.env.REACT_APP_AUTH0_CLIENT_ID || ""}
       audience={process.env.REACT_APP_AUTH0_AUDIENCE || ""}
       redirectUri={`${window.location.origin}${process.env.REACT_APP_AUTH0_RELATIVE_CALLBACK_URL}`}
-    />,
+    />
   );
 }
 

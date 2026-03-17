@@ -17,7 +17,7 @@ export const useEvents = () => {
         `${timetableEventsApiUrl!}/${providerId ? providerId : ""}`,
         {
           headers: { Authorization: `Bearer ${accessToken}` },
-        },
+        }
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -29,7 +29,7 @@ export const useEvents = () => {
     },
     {
       refetchInterval: REFRESH_INTERVAL_MS,
-    },
+    }
   );
 
   return {
