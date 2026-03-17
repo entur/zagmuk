@@ -153,7 +153,7 @@ export const FileUploadDialog = ({
           style={{ marginRight: 10 }}
           disabled={!acceptedFiles.length}
           onClick={() => {
-            mutation.mutate(acceptedFiles);
+            mutation.mutate([...acceptedFiles]);
           }}
         >
           Last opp datasett
