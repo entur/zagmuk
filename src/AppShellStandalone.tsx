@@ -28,7 +28,7 @@ const AuthedApp = () => {
         "https://api.dev.entur.io/timetable-admin/v1/providers",
         {
           headers: { Authorization: `Bearer ${accessToken}` },
-        }
+        },
       );
       const data = await response.json();
       setProviders(data);
@@ -75,7 +75,7 @@ export const AppShellStandalone = (props: Props) => {
       cacheLocation="localstorage"
       useRefreshTokens
       onRedirectCallback={onRedirectCallback((v: string) =>
-        window.history.pushState(null, v)
+        window.history.pushState(null, v),
       )}
     >
       <AuthedApp />

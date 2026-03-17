@@ -36,7 +36,7 @@ class EventDetails extends React.Component {
     dataSource,
     dateFilter,
     endStateFilter,
-    onlyNewDeliveryFilter
+    onlyNewDeliveryFilter,
   ) {
     const lastDate = getLastValidDate(dateFilter);
 
@@ -95,7 +95,7 @@ class EventDetails extends React.Component {
       dataSource,
       dateFilter,
       endStateFilter,
-      onlyNewDeliveryFilter
+      onlyNewDeliveryFilter,
     );
     const paginationMap = getPaginationMap(filteredSource);
 

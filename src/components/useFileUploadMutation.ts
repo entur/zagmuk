@@ -18,7 +18,7 @@ export const useFileUploadMutation = (isFlexDataset: boolean) => {
   const flexUrl = `${timetableAdminApiUrl}/${providerId}/flex/files`;
 
   const [fileUploadState, setFileUploadState] = useState<FileUploadState>(
-    FileUploadState.NOT_STARTED
+    FileUploadState.NOT_STARTED,
   );
   const [progress, setProgress] = useState(0);
 
