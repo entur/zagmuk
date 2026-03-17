@@ -351,7 +351,7 @@ class EventStepper extends React.Component {
             }}
           >
             <div
-              title={translations[locale].duration + listItem.duration}
+              title={format(new Date(listItem.firstEvent), "PPpp", { locale: nb })}
               style={{
                 fontSize: "0.9em",
                 fontWeight: 600,
