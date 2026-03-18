@@ -21,14 +21,21 @@ registerMicroFrontend<AppProps>({
 
 if (process.env.REACT_APP_STANDALONE) {
   const root = ReactDOM.createRoot(document.getElementById("root") as Element);
-  root.render(
-    <AppShellStandalone
-      domain={process.env.REACT_APP_AUTH0_DOMAIN || ""}
-      clientId={process.env.REACT_APP_AUTH0_CLIENT_ID || ""}
-      audience={process.env.REACT_APP_AUTH0_AUDIENCE || ""}
-      redirectUri={`${window.location.origin}${process.env.REACT_APP_AUTH0_RELATIVE_CALLBACK_URL}`}
-    />
-  );
+
+  if (process.env.REACT_APP_AUTH0_DOMAIN) {
+    root.render(
+      <AppShellStandalone
+        domain={process.env.REACT_APP_AUTH0_DOMAIN}
+        clientId={process.env.REACT_APP_AUTH0_CLIENT_ID || ""}
+        audience={process.env.REACT_APP_AUTH0_AUDIENCE || ""}
+        redirectUri={`${window.location.origin}${process.env.REACT_APP_AUTH0_RELATIVE_CALLBACK_URL}`}
+      />
+    );
+  } else {
+    import("./dev/renderDevApp").then(({ renderDevApp }) => {
+      renderDevApp(root);
+    });
+  }
 }
 
 // If you want to start measuring performance in your app, pass a function
