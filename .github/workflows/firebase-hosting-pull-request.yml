@@ -44,7 +44,7 @@ jobs:
             -Dsonar.projectKey=entur_zagmuk
             -Dsonar.sources=src
             -Dsonar.tests=src
-            -Dsonar.test.inclusions=src/**/*.test.ts
+            -Dsonar.test.inclusions=src/**/*.test.{ts,tsx}
             -Dsonar.typescript.lcov.reportPaths=coverage/lcov.info
       - run: npm run build
         env:
