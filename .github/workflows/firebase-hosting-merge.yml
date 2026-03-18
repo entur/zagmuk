@@ -44,12 +44,13 @@ jobs:
             -Dsonar.organization=enturas-github
             -Dsonar.projectKey=entur_zagmuk
             -Dsonar.sources=src
+            -Dsonar.exclusions=src/**/*.test.ts,src/**/*.test.tsx,src/dev/**
             -Dsonar.tests=src
-            -Dsonar.test.inclusions=src/**/*.test.ts
+            -Dsonar.test.inclusions=src/**/*.test.ts,src/**/*.test.tsx
             -Dsonar.typescript.lcov.reportPaths=coverage/lcov.info
       - run: npm run build
         env:
-          REACT_APP_VERSION: ${{ github.sha }}
+          VITE_VERSION: ${{ github.sha }}
       - name: Archive production artifacts
         uses: actions/upload-artifact@v4
         with:

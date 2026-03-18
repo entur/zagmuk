@@ -67,9 +67,9 @@ class EventStepper extends React.Component {
   }
 
   handleToggleVisibility() {
-    this.setState({
-      expanded: !this.state.expanded,
-    });
+    this.setState((prevState) => ({
+      expanded: !prevState.expanded,
+    }));
   }
 
   createCombinedSplit(formattedGroups, groups, name) {
@@ -338,9 +338,17 @@ class EventStepper extends React.Component {
 
     return (
       <div
+        role="button"
+        tabIndex={0}
         key={"event" + listItem.chouetteJobId}
         style={{ margin: "auto", width: "98%", cursor: "pointer" }}
         onClick={() => this.handleToggleVisibility()}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            this.handleToggleVisibility();
+          }
+        }}
       >
         <div style={{ display: "flex", marginLeft: -15 }}>
           <div
@@ -377,12 +385,12 @@ class EventStepper extends React.Component {
         </div>
         <div style={stepperstyle}>
           {bullets}
-          <div
+          <span
             style={{ marginLeft: "auto", marginRight: 20, marginTop: -25 }}
-            onClick={() => this.handleToggleVisibility()}
+            aria-hidden="true"
           >
             {!expanded ? <DownArrowIcon /> : <UpArrowIcon />}
-          </div>
+          </span>
         </div>
         {expanded && (
           <div
