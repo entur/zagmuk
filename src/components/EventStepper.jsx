@@ -67,9 +67,9 @@ class EventStepper extends React.Component {
   }
 
   handleToggleVisibility() {
-    this.setState({
-      expanded: !this.state.expanded,
-    });
+    this.setState((prevState) => ({
+      expanded: !prevState.expanded,
+    }));
   }
 
   createCombinedSplit(formattedGroups, groups, name) {
