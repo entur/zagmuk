@@ -43,9 +43,9 @@ jobs:
             -Dsonar.organization=enturas-github
             -Dsonar.projectKey=entur_zagmuk
             -Dsonar.sources=src
-            -Dsonar.exclusions=src/**/*.test.{ts,tsx}
+            -Dsonar.exclusions=src/**/*.test.ts,src/**/*.test.tsx,src/dev/**
             -Dsonar.tests=src
-            -Dsonar.test.inclusions=src/**/*.test.{ts,tsx}
+            -Dsonar.test.inclusions=src/**/*.test.ts,src/**/*.test.tsx
             -Dsonar.typescript.lcov.reportPaths=coverage/lcov.info
       - run: npm run build
         env:
