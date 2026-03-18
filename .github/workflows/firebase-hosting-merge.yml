@@ -31,8 +31,11 @@ jobs:
         name: List the state of node modules
         continue-on-error: true
         run: npm list
-      - run: npm ci --legacy-peer-deps
+      - run: npm ci
       - run: npm run check
+      - run: npm run build
+        env:
+          VITE_VERSION: ${{ github.sha }}
       - run: npm run test -- --coverage
       - name: SonarQube Scan
         uses: sonarsource/sonarqube-scan-action@master
@@ -48,9 +51,6 @@ jobs:
             -Dsonar.tests=src
             -Dsonar.test.inclusions=src/**/*.test.ts,src/**/*.test.tsx
             -Dsonar.typescript.lcov.reportPaths=coverage/lcov.info
-      - run: npm run build
-        env:
-          VITE_VERSION: ${{ github.sha }}
       - name: Archive production artifacts
         uses: actions/upload-artifact@v4
         with:

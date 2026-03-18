@@ -42,24 +42,17 @@
     "@tanstack/react-query-devtools": "^4.12.0",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/node": "^18.19.68",
+    "@types/node": "^22.19.15",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
     "@vitejs/plugin-react": "^6.0.1",
     "@vitest/coverage-v8": "^4.1.0",
-    "husky": "^8.0.1",
     "jsdom": "^29.0.0",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
     "typescript": "^5.9.3",
     "vite": "^8.0.0",
     "vitest": "^4.1.0"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
