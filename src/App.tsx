@@ -1,7 +1,6 @@
 import React from "react";
 import { DefaultPayload } from "@entur/micro-frontend";
 import * as Sentry from "@sentry/react";
-import { BrowserTracing } from "@sentry/tracing";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ConfigContext, useConfigProviderValue } from "./config/config";
@@ -35,11 +34,7 @@ export function App(props: AppProps) {
 
   Sentry.init({
     dsn: config.sentryDSN,
-    integrations: [new BrowserTracing()],
-
-    // Set tracesSampleRate to 1.0 to capture 100%
-    // of transactions for performance monitoring.
-    // We recommend adjusting this value in production
+    integrations: [Sentry.browserTracingIntegration()],
     tracesSampleRate: 1.0,
     environment: config.env,
     release: `zagmuk@${import.meta.env.VITE_VERSION}`,

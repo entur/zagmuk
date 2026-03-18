@@ -28,7 +28,7 @@ const AuthedApp = () => {
         "https://api.dev.entur.io/timetable-admin/v1/providers",
         {
           headers: { Authorization: `Bearer ${accessToken}` },
-        }
+        },
       );
       const data = await response.json();
       setProviders(data);
@@ -48,11 +48,18 @@ const AuthedApp = () => {
     <>
       <Dropdown
         label="Provider"
-        items={() =>
-          providers.map((p) => ({ value: String(p.id), label: p.name }))
+        items={providers.map((p) => ({ value: String(p.id), label: p.name }))}
+        onChange={(item) => setProviderId(item?.value)}
+        selectedItem={
+          providerId
+            ? {
+                value: providerId,
+                label:
+                  providers.find((p) => String(p.id) === providerId)?.name ??
+                  providerId,
+              }
+            : null
         }
-        onChange={(p: any) => setProviderId(p.value)}
-        value={providerId}
       />
       <App
         locale={import.meta.env.VITE_LOCALE || "en"}
@@ -75,7 +82,7 @@ export const AppShellStandalone = (props: Props) => {
       cacheLocation="localstorage"
       useRefreshTokens
       onRedirectCallback={onRedirectCallback((v: string) =>
-        window.history.pushState(null, v)
+        window.history.pushState(null, v),
       )}
     >
       <AuthedApp />

@@ -37,7 +37,7 @@ describe.skipIf(!hasBuild)("build output", () => {
   test("asset-manifest.json only lists entry JS (no code-split chunks)", () => {
     const manifest = readManifest();
     const jsFiles = Object.values(manifest.files).filter((f) =>
-      f.endsWith(".js")
+      f.endsWith(".js"),
     );
     expect(jsFiles).toHaveLength(1);
   });

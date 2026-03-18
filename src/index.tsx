@@ -42,7 +42,7 @@ if (import.meta.env.VITE_STANDALONE) {
         redirectUri={`${window.location.origin}${
           import.meta.env.VITE_AUTH0_RELATIVE_CALLBACK_URL
         }`}
-      />
+      />,
     );
   } else {
     import("./dev/renderDevApp").then(({ renderDevApp }) => {

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import {
   ValidationErrorIcon,
-  ValidationCheckIcon,
+  ValidationSuccessIcon,
   ClockIcon,
   SettingsIcon,
   QuestionIcon,
@@ -13,7 +13,7 @@ class EventStatusIcon extends Component {
     switch (this.props.state) {
       case "OK":
         return (
-          <ValidationCheckIcon
+          <ValidationSuccessIcon
             style={{ color: "green", width: 22, height: 22 }}
           />
         );

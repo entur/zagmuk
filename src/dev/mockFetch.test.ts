@@ -11,7 +11,7 @@ describe("installMockFetch", () => {
   test("intercepts requests to events/timetable endpoint", async () => {
     installMockFetch();
     const response = await fetch(
-      "https://api.dev.entur.io/timetable-admin/v1/events/timetable/2"
+      "https://api.dev.entur.io/timetable-admin/v1/events/timetable/2",
     );
     expect(response.ok).toBe(true);
     const data = await response.json();

@@ -17,7 +17,7 @@ describe("getPipelineSteps", () => {
 
   test("returns experimental steps when experimental import is enabled", () => {
     expect(
-      getPipelineSteps({ chouetteInfo: { enableExperimentalImport: true } })
+      getPipelineSteps({ chouetteInfo: { enableExperimentalImport: true } }),
     ).toBe(EXPERIMENTAL_IMPORT_STEPS);
   });
 });
@@ -35,7 +35,7 @@ describe("isExperimentalImportEnabled", () => {
     expect(
       isExperimentalImportEnabled({
         chouetteInfo: { enableExperimentalImport: true },
-      })
+      }),
     ).toBe(true);
   });
 });
