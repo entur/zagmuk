@@ -95,9 +95,13 @@ export default defineConfig({
   },
   build: {
     outDir: "build",
-    chunkSizeWarningLimit: 700,
-    // Sentry 7.x has CJS/ESM interop issues; suppress until upgraded
+    chunkSizeWarningLimit: 1000,
+    // Build as IIFE (not ESM) because @entur/micro-frontend loads scripts
+    // via <script> tags, not <script type="module">
     rollupOptions: {
+      output: {
+        format: "iife",
+      },
       onwarn(warning, defaultHandler) {
         if (warning.code === "COMMONJS_VARIABLE_IN_ESM") return;
         defaultHandler(warning);
