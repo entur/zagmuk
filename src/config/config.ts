@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-const globalConfig = require("./global.json");
+import globalConfig from "./global.json";
 
 export interface Config {
   sentryDSN?: string;

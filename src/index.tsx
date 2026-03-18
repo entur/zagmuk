@@ -1,8 +1,20 @@
 import React from "react";
 import ReactDOM, { createRoot } from "react-dom/client";
 import { AppShellStandalone } from "./AppShellStandalone";
-import reportWebVitals from "./reportWebVitals";
-
+import "@entur/icons/dist/styles.css";
+import "@entur/button/dist/styles.css";
+import "@entur/loader/dist/styles.css";
+import "@entur/typography/dist/styles.css";
+import "@entur/menu/dist/styles.css";
+import "@entur/a11y/dist/styles.css";
+import "@entur/expand/dist/styles.css";
+import "@entur/layout/dist/styles.css";
+import "@entur/dropdown/dist/styles.css";
+import "@entur/chip/dist/styles.css";
+import "@entur/form/dist/styles.css";
+import "@entur/tooltip/dist/styles.css";
+import "@entur/tokens/dist/styles.css";
+import "@entur/modal/dist/styles.css";
 import "./index.css";
 import { registerMicroFrontend } from "@entur/micro-frontend";
 import { App, AppProps } from "./App";
@@ -19,16 +31,18 @@ registerMicroFrontend<AppProps>({
   },
 });
 
-if (process.env.REACT_APP_STANDALONE) {
+if (import.meta.env.VITE_STANDALONE) {
   const root = ReactDOM.createRoot(document.getElementById("root") as Element);
 
-  if (process.env.REACT_APP_AUTH0_DOMAIN) {
+  if (import.meta.env.VITE_AUTH0_DOMAIN) {
     root.render(
       <AppShellStandalone
-        domain={process.env.REACT_APP_AUTH0_DOMAIN}
-        clientId={process.env.REACT_APP_AUTH0_CLIENT_ID || ""}
-        audience={process.env.REACT_APP_AUTH0_AUDIENCE || ""}
-        redirectUri={`${window.location.origin}${process.env.REACT_APP_AUTH0_RELATIVE_CALLBACK_URL}`}
+        domain={import.meta.env.VITE_AUTH0_DOMAIN}
+        clientId={import.meta.env.VITE_AUTH0_CLIENT_ID || ""}
+        audience={import.meta.env.VITE_AUTH0_AUDIENCE || ""}
+        redirectUri={`${window.location.origin}${
+          import.meta.env.VITE_AUTH0_RELATIVE_CALLBACK_URL
+        }`}
       />
     );
   } else {
@@ -37,8 +51,3 @@ if (process.env.REACT_APP_STANDALONE) {
     });
   }
 }
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();

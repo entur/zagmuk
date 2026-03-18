@@ -55,8 +55,8 @@ const AuthedApp = () => {
         value={providerId}
       />
       <App
-        locale={process.env.REACT_APP_LOCALE || "en"}
-        env={process.env.REACT_APP_ENV || "dev"}
+        locale={import.meta.env.VITE_LOCALE || "en"}
+        env={import.meta.env.VITE_ENV || "dev"}
         getToken={auth.getAccessTokenSilently}
         providerId={providerId}
         providers={providersMap}

@@ -9,7 +9,7 @@ export function renderDevApp(root: Root): void {
   root.render(
     <App
       locale="en"
-      env={process.env.REACT_APP_ENV || "dev"}
+      env={import.meta.env.VITE_ENV || "dev"}
       getToken={() => Promise.resolve("mock-token")}
       providerId="2"
       providers={{

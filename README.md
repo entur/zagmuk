@@ -13,8 +13,8 @@ This app is a micro-frontend designed to run inside the Ninkasi host application
 Create a `.env.development.local` file (gitignored):
 
 ```
-REACT_APP_STANDALONE=true
-REACT_APP_ENV=dev
+VITE_STANDALONE=true
+VITE_ENV=dev
 ```
 
 Then run:
