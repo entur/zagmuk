@@ -1,9 +1,6 @@
-import React from "react";
-import ReactDOM, { createRoot } from "react-dom/client";
+import { createRoot } from "react-dom/client";
 import { AppShellStandalone } from "./AppShellStandalone";
 import "@entur/tokens/dist/styles.css";
-import "@entur/chip/node_modules/@entur/tokens/dist/primitive.css";
-import "@entur/chip/node_modules/@entur/tokens/dist/semantic.css";
 import "@entur/icons/dist/styles.css";
 import "@entur/button/dist/styles.css";
 import "@entur/loader/dist/styles.css";
@@ -34,7 +31,7 @@ registerMicroFrontend<AppProps>({
 });
 
 if (import.meta.env.VITE_STANDALONE) {
-  const root = ReactDOM.createRoot(document.getElementById("root") as Element);
+  const root = createRoot(document.getElementById("root") as Element);
 
   if (import.meta.env.VITE_AUTH0_DOMAIN) {
     root.render(

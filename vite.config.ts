@@ -2,6 +2,7 @@ import { defineConfig, Plugin } from "vite";
 import react from "@vitejs/plugin-react";
 import { writeFileSync } from "fs";
 import { resolve } from "path";
+import { createRequire } from "module";
 
 /**
  * Generates asset-manifest.json compatible with @entur/micro-frontend.
@@ -38,8 +39,36 @@ function assetManifestPlugin(): Plugin {
   };
 }
 
+/**
+ * Resolves webpack's ~ prefix in CSS @import statements.
+ * @entur packages use @import "~@entur/tokens/..." which webpack resolved
+ * from node_modules. Vite doesn't support this natively.
+ */
+function resolveTildePlugin(): Plugin {
+  return {
+    name: "resolve-tilde-css",
+    enforce: "pre",
+    transform(code, id) {
+      if (id.endsWith(".css") && code.includes("~@entur")) {
+        const imports: string[] = [];
+        const stripped = code.replace(
+          /@import\s+["']~(@entur\/[^"']+)["'];?/g,
+          (_, pkg) => {
+            const localRequire = createRequire(id);
+            const resolved = localRequire.resolve(pkg);
+            imports.push(`@import "${resolved}";`);
+            return "";
+          },
+        );
+        // Move resolved @imports to the top so postcss processes them
+        return { code: imports.join("\n") + "\n" + stripped, map: null };
+      }
+    },
+  };
+}
+
 export default defineConfig({
-  plugins: [react(), assetManifestPlugin()],
+  plugins: [react(), assetManifestPlugin(), resolveTildePlugin()],
   css: {
     postcss: {
       plugins: [

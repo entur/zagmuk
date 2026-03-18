@@ -1,4 +1,4 @@
-import { describe, test, expect, afterEach } from "vitest";
+import { describe, test, expect, afterEach, vi } from "vitest";
 import { installMockFetch } from "./mockFetch";
 
 describe("installMockFetch", () => {
@@ -20,21 +20,10 @@ describe("installMockFetch", () => {
   });
 
   test("passes through non-matching requests", async () => {
+    const fakeFetch = vi.fn().mockResolvedValue(new Response("ok"));
+    globalThis.fetch = fakeFetch;
     installMockFetch();
-    const mockResponse = new Response("ok");
-    globalThis.fetch = (() => {
-      const intercepted = globalThis.fetch;
-      return async (input: any, init: any) => {
-        const url = typeof input === "string" ? input : input.url;
-        if (url.includes("/events/timetable/")) {
-          return intercepted(input, init);
-        }
-        return mockResponse;
-      };
-    })();
-
-    installMockFetch();
-    const response = await fetch("https://example.com/other");
-    expect(response).toBe(mockResponse);
+    await fetch("https://example.com/other");
+    expect(fakeFetch).toHaveBeenCalledOnce();
   });
 });

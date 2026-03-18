@@ -1,4 +1,3 @@
-import React from "react";
 import { Root } from "react-dom/client";
 import { App } from "../App";
 import { installMockFetch } from "./mockFetch";
