@@ -8,8 +8,8 @@ export function installMockFetch(): void {
       typeof input === "string"
         ? input
         : input instanceof URL
-        ? input.toString()
-        : input.url;
+          ? input.toString()
+          : input.url;
 
     if (url.includes("/events/timetable/")) {
       return new Response(JSON.stringify(createMockEvents()), {

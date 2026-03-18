@@ -14,6 +14,6 @@ export function renderDevApp(root: Root): void {
       providers={{
         "2": { id: 2, name: "Mock Provider" },
       }}
-    />
+    />,
   );
 }
