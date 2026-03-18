@@ -2,6 +2,10 @@
   "name": "zagmuk",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=22",
+    "npm": ">=10"
+  },
   "dependencies": {
     "@auth0/auth0-react": "^2.15.1",
     "@entur/button": "^4.0.4",
