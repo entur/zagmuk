@@ -42,7 +42,7 @@ export function App(props: AppProps) {
     // We recommend adjusting this value in production
     tracesSampleRate: 1.0,
     environment: config.env,
-    release: `zagmuk@${import.meta.env.VITE_VERSION}`,
+    release: `zagmuk@${process.env.REACT_APP_VERSION}`,
   });
 
   return (
