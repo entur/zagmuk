@@ -8,6 +8,10 @@ export function createMockEvents(): TimetableJobEvent[] {
       chouetteJobId: "1001",
       providerId: 2,
       firstEvent: now - 3600000,
+      lastEvent: now - 2700000,
+      durationMillis: 900000,
+      fileName: "netex-20260318-120000.zip",
+      username: "mock-user",
       endState: "OK",
       events: [
         { action: "FILE_TRANSFER", state: "OK", date: now - 3600000 },
@@ -26,6 +30,10 @@ export function createMockEvents(): TimetableJobEvent[] {
       chouetteJobId: "1002",
       providerId: 2,
       firstEvent: now - 7200000,
+      lastEvent: now - 7000000,
+      durationMillis: 200000,
+      fileName: "netex-20260318-100000.zip",
+      username: "mock-user",
       endState: "FAILED",
       events: [
         { action: "FILE_TRANSFER", state: "OK", date: now - 7200000 },
@@ -37,6 +45,10 @@ export function createMockEvents(): TimetableJobEvent[] {
       chouetteJobId: "1003",
       providerId: 2,
       firstEvent: now - 86400000,
+      lastEvent: now - 85700000,
+      durationMillis: 700000,
+      fileName: "netex-20260317-120000.zip",
+      username: "mock-user",
       endState: "OK",
       events: [
         { action: "FILE_TRANSFER", state: "OK", date: now - 86400000 },

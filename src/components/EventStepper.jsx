@@ -341,7 +341,12 @@ class EventStepper extends React.Component {
         role="button"
         tabIndex={0}
         key={"event" + listItem.chouetteJobId}
-        style={{ margin: "auto", width: "98%", cursor: "pointer" }}
+        style={{
+          margin: "auto",
+          width: "98%",
+          cursor: "pointer",
+          outline: "none",
+        }}
         onClick={() => this.handleToggleVisibility()}
         onKeyDown={(e) => {
           if (e.key === "Enter" || e.key === " ") {
