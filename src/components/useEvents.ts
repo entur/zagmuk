@@ -9,9 +9,9 @@ export const useEvents = () => {
   const { timetableEventsApiUrl } = useConfig();
   const { providerId, getToken } = useContext(AppContext);
 
-  const { isLoading, isError, data, error } = useQuery<any, Error>(
-    ["events", providerId],
-    async () => {
+  const { isLoading, isError, data, error } = useQuery({
+    queryKey: ["events", providerId],
+    queryFn: async () => {
       const accessToken = await getToken!();
       const response = await fetch(
         `${timetableEventsApiUrl!}/${providerId ? providerId : ""}`,
@@ -27,10 +27,8 @@ export const useEvents = () => {
         .sort((a: any, b: any) => a.firstEvent - b.firstEvent)
         .reverse();
     },
-    {
-      refetchInterval: REFRESH_INTERVAL_MS,
-    },
-  );
+    refetchInterval: REFRESH_INTERVAL_MS,
+  });
 
   return {
     isLoading,

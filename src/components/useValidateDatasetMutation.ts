@@ -9,14 +9,16 @@ export const useValidateDatasetMutation = () => {
   const { getToken, providerId } = useContext(AppContext);
   const url = `${timetableAdminApiUrl}/${providerId}/validate`;
 
-  const mutation = useMutation(async () => {
-    const accessToken = await getToken!();
+  const mutation = useMutation({
+    mutationFn: async () => {
+      const accessToken = await getToken!();
 
-    await axios.post(url, null, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
+      await axios.post(url, null, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+    },
   });
 
   return {

@@ -38,10 +38,12 @@ if (import.meta.env.VITE_STANDALONE) {
       <AppShellStandalone
         domain={import.meta.env.VITE_AUTH0_DOMAIN}
         clientId={import.meta.env.VITE_AUTH0_CLIENT_ID || ""}
-        audience={import.meta.env.VITE_AUTH0_AUDIENCE || ""}
-        redirectUri={`${window.location.origin}${
-          import.meta.env.VITE_AUTH0_RELATIVE_CALLBACK_URL
-        }`}
+        authorizationParams={{
+          audience: import.meta.env.VITE_AUTH0_AUDIENCE || "",
+          redirect_uri: `${window.location.origin}${
+            import.meta.env.VITE_AUTH0_RELATIVE_CALLBACK_URL
+          }`,
+        }}
       />,
     );
   } else {

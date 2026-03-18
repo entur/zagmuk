@@ -22,32 +22,34 @@ export const useFileUploadMutation = (isFlexDataset: boolean) => {
   );
   const [progress, setProgress] = useState(0);
 
-  const mutation = useMutation(async (files: File[]) => {
-    setFileUploadState(FileUploadState.STARTED);
-    const accessToken = await getToken!();
+  const mutation = useMutation({
+    mutationFn: async (files: File[]) => {
+      setFileUploadState(FileUploadState.STARTED);
+      const accessToken = await getToken!();
 
-    const data = new FormData();
+      const data = new FormData();
 
-    files.forEach((file) => {
-      data.append("files", file);
-    });
-
-    try {
-      await axios.post(isFlexDataset ? flexUrl : url, data, {
-        onUploadProgress: (progressEvent) => {
-          const percentCompleted =
-            (progressEvent.loaded / progressEvent.total!) * 100;
-          setProgress(percentCompleted);
-        },
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
+      files.forEach((file) => {
+        data.append("files", file);
       });
-      setFileUploadState(FileUploadState.COMPLETED);
-    } catch (e) {
-      setFileUploadState(FileUploadState.FAILED);
-      throw e;
-    }
+
+      try {
+        await axios.post(isFlexDataset ? flexUrl : url, data, {
+          onUploadProgress: (progressEvent) => {
+            const percentCompleted =
+              (progressEvent.loaded / progressEvent.total!) * 100;
+            setProgress(percentCompleted);
+          },
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+        setFileUploadState(FileUploadState.COMPLETED);
+      } catch (e) {
+        setFileUploadState(FileUploadState.FAILED);
+        throw e;
+      }
+    },
   });
 
   return {
