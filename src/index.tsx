@@ -1,6 +1,9 @@
 import React from "react";
 import ReactDOM, { createRoot } from "react-dom/client";
 import { AppShellStandalone } from "./AppShellStandalone";
+import "@entur/tokens/dist/styles.css";
+import "@entur/chip/node_modules/@entur/tokens/dist/primitive.css";
+import "@entur/chip/node_modules/@entur/tokens/dist/semantic.css";
 import "@entur/icons/dist/styles.css";
 import "@entur/button/dist/styles.css";
 import "@entur/loader/dist/styles.css";
@@ -13,7 +16,6 @@ import "@entur/dropdown/dist/styles.css";
 import "@entur/chip/dist/styles.css";
 import "@entur/form/dist/styles.css";
 import "@entur/tooltip/dist/styles.css";
-import "@entur/tokens/dist/styles.css";
 import "@entur/modal/dist/styles.css";
 import "./index.css";
 import { registerMicroFrontend } from "@entur/micro-frontend";
