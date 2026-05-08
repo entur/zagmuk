@@ -24,7 +24,7 @@
     "@entur/utils": "^0.13.2",
     "@sentry/react": "^10.44.0",
     "@tanstack/react-query": "^5.90.21",
-    "axios": "^1.15.0",
+    "axios": "^1.15.2",
     "date-fns": "^4.1.0",
     "duration-fns": "^3.0.1",
     "react": "^19.2.4",
