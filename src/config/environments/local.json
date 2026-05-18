@@ -1,0 +1,7 @@
+{
+  "env": "local",
+  "sentryDSN": "",
+  "chouetteBaseUrl": "http://localhost:21080/",
+  "timetableEventsApiUrl": "http://localhost:21004/services/events/timetable",
+  "timetableAdminApiUrl": "http://localhost:21080/services/timetable_admin"
+}
